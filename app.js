@@ -9,7 +9,7 @@ var express = require('express');
 var app = express();
 
 app.use(passport.initialize());
-app.use(express.static(path.join(__dirname, "../../Dropbox/mean_app")));
+app.use(express.static(path.join(__dirname, "./client")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true

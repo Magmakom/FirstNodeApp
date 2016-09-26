@@ -1,0 +1,289 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">WebSiteName</a>
+        </div>
+        <ul class="nav navbar-nav"></ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#/login" ng-click="logout()"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container container-mrg-lg">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="page-header" style="text-align: center; margin-top: 10px">
+                        <img src="http://res.cloudinary.com/dfs2je0ss/image/upload/v1474900062/logo_djcykg.png" width="180px" >
+                        <h3 id="tables">User Panel</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="btn-group-vertical col-sm-12">
+                        <button type="button" class="btn btn-default btn-block btn-pdd" ng-repeat="(key,value) in model.forms" ng-click="view(key)">{{key}}</button>
+                    </div>
+                    
+                </div>
+                <div class="col-sm-9">
+                    <div class="thumbnail container-pdd" ng-show="model.forms['Visa to Russia issue'].view">
+                        <form class="form-horizontal" name="form" ng-submit="submit('Visa to Russia issue')">
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-8">
+                                    <h4>Visa to Russia issue</h4>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-sm-3">Office address</div>
+                                <div class="col-sm-8">
+                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Visa to Russia issue'].address" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-sm-3">Passport number</div>
+                                <div class="col-sm-8">
+                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Visa to Russia issue'].number" required>
+                                </div>
+                            </div>
+                            <div class="form-group"> 
+                                <div class="col-sm-offset-3 col-sm-4">
+                                    <button type="submit" class="btn btn-primary btn-block" >Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="thumbnail container-pdd" ng-show="model.forms['Visa to Ukraine issue'].view">
+                        <form class="form-horizontal" name="form" ng-submit="submit('Visa to Ukraine issue')">
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-8">
+                                    <h4>Visa to Ukraine issue</h4>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-sm-3">Office address</div>
+                                <div class="col-sm-8">
+                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Visa to Ukraine issue'].address" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-sm-3">Passport number</div>
+                                <div class="col-sm-8">
+                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Visa to Ukraine issue'].number" required>
+                                </div>
+                            </div>
+                            <div class="form-group"> 
+                                <div class="col-sm-offset-3 col-sm-4">
+                                    <button type="submit" class="btn btn-primary btn-block" >Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="thumbnail container-pdd" ng-show="model.forms['Airport transfer equipment'].view">
+                        <form class="form-horizontal" name="form" ng-submit="submit('Airport transfer equipment')">
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-8">
+                                    <h4>Airport transfer equipment</h4>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-sm-3">Name of equipment</div>
+                                <div class="col-sm-8">
+                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Airport transfer equipment'].name" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-sm-3">From place</div>
+                                <div class="col-sm-8">
+                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Airport transfer equipment'].from" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-sm-3">To place</div>
+                                <div class="col-sm-8">
+                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Airport transfer equipment'].to" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-sm-3">Date</div>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="model.forms['Airport transfer equipment'].date" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" >
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="open1()" style="padding:9px"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="form-group"> 
+                                <div class="col-sm-offset-3 col-sm-4">
+                                    <button type="submit" class="btn btn-primary btn-block" >Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="thumbnail container-pdd" ng-show="model.forms['Banking'].view">
+                        <form class="form-horizontal" name="form" ng-submit="submit('Banking')">
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-8">
+                                    <h4>Banking</h4>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-sm-3">Amount ($)</div>
+                                <div class="col-sm-8">
+                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Banking'].amount" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-sm-3">From</div>
+                                <div class="col-sm-8">
+                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Banking'].amount" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-sm-3">To</div>
+                                <div class="col-sm-8">
+                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Banking'].amount" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-sm-3">Additional info</div>
+                                <div class="col-sm-8">
+                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Banking'].info" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-sm-3">Date</div>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="model.forms['Banking'].date" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" >
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="open1()" style="padding:9px"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="form-group"> 
+                                <div class="col-sm-offset-3 col-sm-4">
+                                    <button type="submit" class="btn btn-primary btn-block" >Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="thumbnail container-pdd" ng-show="model.forms['Credit Debit'].view">
+                        <form class="form-horizontal" name="form" ng-submit="submit('Credit Debit')">
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-8">
+                                    <h4>Credit Debit</h4>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-sm-3">Amount ($)</div>
+                                <div class="col-sm-8">
+                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Credit Debit'].amount" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-sm-3">From</div>
+                                <div class="col-sm-8">
+                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Credit Debit'].amount" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-sm-3">To</div>
+                                <div class="col-sm-8">
+                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Credit Debit'].amount" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-sm-3">Additional info</div>
+                                <div class="col-sm-8">
+                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Credit Debit'].info" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-sm-3">Date</div>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="model.forms['Credit Debit'].date" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" >
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="open1()" style="padding:9px"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="form-group"> 
+                                <div class="col-sm-offset-3 col-sm-4">
+                                    <button type="submit" class="btn btn-primary btn-block" >Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="thumbnail container-pdd" ng-show="model.forms['Purchase'].view">
+                        <form class="form-horizontal" name="form" ng-submit="submit('Purchase')">
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-8">
+                                    <h4>Purchase</h4>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-sm-4">Acquisition for (goods)</div>
+                                <div class="col-sm-8">
+                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Purchase'].acquisitionFor" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-sm-4">Where (place of purchase)</div>
+                                <div class="col-sm-8">
+                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Purchase'].where" required>
+                                </div>
+                            </div>
+                            <div class="form-group"> 
+                                <div class="col-sm-offset-4 col-sm-4">
+                                    <button type="submit" class="btn btn-primary btn-block" >Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="thumbnail container-pdd"  ng-show="model.forms['Other'].view">
+                        <form class="form-horizontal" name="form" ng-submit="submit('Other')">
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-8">
+                                    <h4>Other</h4>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-sm-3">Title</div>
+                                <div class="col-sm-8">
+                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Other'].title" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-sm-3">Message</div>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control"  rows="4" ng-model="model.forms['Other'].message" required>
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="form-group"> 
+                                <div class="col-sm-offset-3 col-sm-4">
+                                    <button type="submit" class="btn btn-primary btn-block" >Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+					<div class="container-mrg">
+                        <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="  closeAlert($index)">{{alert.msg}}</div>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

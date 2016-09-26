@@ -113,12 +113,16 @@ exports.approve = function(req, res, next) {
             res.json({
                 success: true
             });
-            template = "case.approve";
+            if (status === "approved") {
+                template = "case.approve";
+            } else if (status === "reject") {
+                template = "case.reject";
+            }
             params = {
                 "{!username}": user.name,
-                "{!casename}": user.cases[0].name
+                "{!casenumber}": user.number
             };
-            mailer.sendMail(user.email, params, template, "Subj");
+            if (template) mailer.sendMail(user.email, params, template, "Subj");
         }
     );
 };

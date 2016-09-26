@@ -1,0 +1,139 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">WebSiteName</a>
+		</div>
+		<ul class="nav navbar-nav">
+			<li><a href="#/admin/users">Users</a></li>
+			<li><a href="#/admin/cases">Cases</a></li>
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href="#/login" ng-click="logout()"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
+		</ul>
+	</div>
+</nav>
+
+<div class="container container-mrg-lg">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="page-header" style="text-align: center; margin-top: 10px">
+                        <img src="http://res.cloudinary.com/dfs2je0ss/image/upload/v1474900062/logo_djcykg.png" width="180px" >
+                        <h4 id="tables">User Management</h4>
+                    </div>
+					<ul class="list-group">
+  						<li class="list-group-item">
+							<form class="form-inline" name="form">
+								<div class="form-group">
+		        					<label>Search</label>
+									<input type="text" name="search" class="form-control" ng-model="model.search"  placeholder="Search">
+		        				</div>
+							</form>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<ul class="list-group">
+  						<li class="list-group-item">
+							<table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                         <th>Name</th>
+                                         <th>Email</th>
+                                         <th>Status</th>
+                                         <th><div style="float: right">Action</div></th>
+                                    </tr>
+                                </thead>
+                    		    <tbody>
+                                    <tr ng-repeat="user in model.users | orderBy:model.sortKey:model.reverse | filter:model.search">
+                                        <td ng-click="openDetails(user)">{{user.firstName}} {{user.lastName}}</td>
+                                        <td ng-click="openDetails(user)">{{user.email}}</td>
+                                        <td ng-click="openDetails(user)">
+                                        	<span class="label label-info" ng-show="user.status=='waiting'">Waiting</span>
+                                        	<span class="label label-warning" ng-show="user.status=='rejected'">Rejected</span>
+                                        	<span class="label label-success" ng-show="user.status=='approved'">Approved</span>
+                                        </td>
+                                        <td>
+                                            <div style="float: right">
+                                         	    <div ng-show="user.status=='waiting'">
+                                                    <a href="" ng-click="reject(user._id)">Reject</a>
+                                                    <b> | </b>
+                                                    <a href="" ng-click="approve(user._id)">Approve</a>
+                                         	    </div>
+                                         	    <div  ng-hide="user.status=='waiting'">
+                                         	    	<a href="" ng-click="reject(user._id)">Deactivate</a>
+                                                    <b> | </b>
+                                         	    	<a href="" ng-click="approve(user._id)">Activate</a>
+                                         	    </div>
+                                            </div>
+                                         </td>
+                                    </tr>
+                                </tbody>
+							</table>
+						</li>
+					</ul>
+					<div class="container-mrg">
+                        <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="  closeAlert($index)">{{alert.msg}}</div>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modals -->
+
+<script type="text/ng-template" id="userDetailsModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">User Details: {{model.firstName}} {{model.lastName}}</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <table style="margin-left: 20px">
+            <tr>
+                <td><div class="user-details">Email:</div></td> <td>{{model.email}}</td>
+            </tr>
+            <tr>
+                <td><div class="user-details">Name:</div></td> <td>{{model.firstName}} {{model.lastName}}</td>
+            </tr>
+            <tr>
+               <td><div class="user-details">Status:</div></td>
+               <td>
+                <span class="label label-info" ng-show="model.status=='waiting'">Waiting</span>
+                <span class="label label-warning" ng-show="model.status=='rejected'">Rejected</span>
+                <span class="label label-success" ng-show="model.status=='approved'">Approved</span>
+               </td>
+            </tr>
+            <tr>
+                <td><div class="user-details">Cell phone:</div></td> <td>{{model.phoneCell}}</td>
+            </tr>
+            <tr>
+                <td><div class="user-details">Office phone:</div></td> <td>{{model.phoneOffice}}</td>
+            </tr>
+            <tr>
+                <td><div class="user-details">City:</div></td> <td>{{model.city}}</td>
+            </tr>
+            <tr>
+               <td><div class="user-details">Signup date:</div></td><td>{{model.created}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button ng-show="model.status=='waiting'" class="btn btn-success" type="button" ng-click="approve()">Approve</button>
+        <button ng-show="model.status=='waiting'" class="btn btn-danger" type="button" ng-click="reject()">Reject</button>
+        <button ng-hide="model.status=='waiting'" class="btn btn-success" type="button" ng-click="approve()">Activate</button>
+        <button ng-hide="model.status=='waiting'" class="btn btn-danger" type="button" ng-click="reject()">Deactivate</button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">Close</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="resultModal.html">
+    <div class="modal-body" id="modal-body">
+        <div role="alert" ng-class="'alert alert-' + (model.type || 'warning')">{{model.message}}</div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" type="button" ng-click="cancel()">Close</button>
+    </div>
+</script>

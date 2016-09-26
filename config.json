@@ -4,6 +4,11 @@
   "mongoose": {
       "uri": "mongodb://localhost/firstApp"
   },
+  "admin": {
+    "email": "nodesynebo@gmail.com",
+    "password": "rout_main",
+    "lastName": "Admin"
+  },
   "serverSecret": "supersecret",
   "domain": "http://192.168.0.102"
 }

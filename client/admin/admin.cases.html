@@ -1,0 +1,93 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">WebSiteName</a>
+		</div>
+		<ul class="nav navbar-nav">
+			<li><a href="#/admin/users">Users</a></li>
+			<li><a href="#/admin/cases">Cases</a></li>
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href="#/login" ng-click="logout()"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
+		</ul>
+	</div>
+</nav>
+
+<div class="container container-mrg-lg">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="page-header" style="text-align: center; margin-top: 10px">
+                        <img src="http://res.cloudinary.com/dfs2je0ss/image/upload/v1474900062/logo_djcykg.png" width="180px" >
+                        <h4 id="tables">Case Management</h4>
+                    </div>
+					<ul class="list-group">
+  						<li class="list-group-item">
+							<form class="form-inline" name="form">
+								<div class="form-group">
+		        					<label>Search</label>
+									<input type="text" name="search" class="form-control" ng-model="model.search"  placeholder="Search">
+		        				</div>
+							</form>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<ul class="list-group">
+  						<li class="list-group-item">
+							<table class="table table-hover">
+								 <thead>
+                    		        <tr>
+                    		        	<th>
+                    		        		User
+                    		        	</th>
+                    		            <th ng-click="sort(first_name)">Case type
+                    		            	<span class="glyphicon sort-icon" ng-show="model.sortKey=='first_name'" ng-class="{'glyphicon-chevron-up':model.reverse,'glyphicon-chevron-down':!model.reverse}">
+                    		            </th>
+                    		            <th ng-click="sort(last_name)">Body
+                    		            	<span class="glyphicon sort-icon" ng-show="model.sortKey=='last_name'" ng-class="{'glyphicon-chevron-up':model.reverse,'glyphicon-chevron-down':!model.reverse}">
+                    		            </th>
+                    		            <th ng-click="sort(hobby)">Status
+                    		            	<span class="glyphicon sort-icon" ng-show="model.sortKey=='hobby'" ng-class="{'glyphicon-chevron-up':model.reverse,'glyphicon-chevron-down':!model.reverse}">
+                    		            </th>
+                    		            <th>
+                    		            	Action
+                    		            </th>
+                    		        </tr>
+                    		    </thead>
+                    		    <tbody>
+                    		        <tr ng-repeat="case in model.cases | orderBy:model.sortKey:model.reverse | filter:model.search">
+                                             <td>{{case.userName}}</td>
+                                             <td>{{case.name}}</td>
+                                             <td>
+                    		             	    <div ng-repeat="(key, value) in case.body"><b>{{key}}</b> : {{value}}</div>
+                                             </td>
+                                             <td>
+                                             	<span class="label label-info" ng-show="case.status=='waiting'">Waiting</span>
+                                             	<span class="label label-warning" ng-show="case.status=='rejected'">Rejected</span>
+                                             	<span class="label label-success" ng-show="case.status=='approved'">Approved</span>
+                                             </td>
+                                             <td>
+                    		            	<div  ng-show="case.status=='waiting'">
+                    		            		<a href="" ng-click="reject(case._id)">Reject</a>
+                                                  <b> | </b>
+                    		            		<a href="" ng-click="approve(case._id)">Approve</a>
+                    		            	</div>
+                    		            </td>
+                    		        </tr>
+                    		    </tbody>
+							</table>
+						</li>
+					</ul>
+                         <div class="container-mrg">
+                              <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="  closeAlert($index)">{{alert.msg}}</div>
+                         </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>

@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var log = require('../log')(module);
 var config = require('../config');
+var utils = require('../utils');
 
 mongoose.connect(config.get('mongoose:uri'));
 
@@ -12,6 +13,7 @@ db.on('error', function(err) {
 
 db.once('open', function callback() {
     log.info("Connected to DB!");
+    utils.initAdmin();
 });
 
 module.exports = mongoose;

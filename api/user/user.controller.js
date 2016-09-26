@@ -98,14 +98,16 @@ exports.approve = function(req, res, next) {
                 success: true,
             });
         })
-        if (status) {
+        if (status === "approved") {
             template = "signup.approve";
-            params = {
-                "{!username}": user.name,
-                "{!loginLink}": config.get('domain') + ':' + config.get('port') + '/#/login?token=' + generateToken(user)
-            };
-            mailer.sendMail(user.email, params, template, "Subj");
+        } else if (status === "reject") {
+            template = "signup.reject";
         }
+        params = {
+            "{!username}": user.name,
+            "{!loginLink}": config.get('domain') + ':' + config.get('port') + '/#/login?token=' + generateToken(user)
+        };
+        if (template) mailer.sendMail(user.email, params, template, "Subj");
     });
 }
 

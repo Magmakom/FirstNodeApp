@@ -33,7 +33,7 @@ module.exports = function(app) {
     // All other routes should redirect to the index.html
     app.get('/*', function(req, res) {
         res.sendfile('index.html', {
-            root: path.join(__dirname, "../../Dropbox/mean_app")
+            root: path.join(__dirname, "./client")
         })
     });
 };;

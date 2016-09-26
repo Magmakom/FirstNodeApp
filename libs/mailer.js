@@ -20,7 +20,7 @@ function sendMail(to, params, template, subject) {
 }
 
 function getTemplate(params, template) {
-    templatePath = "../../Dropbox/mean_app/emailTemplates/" + template + ".html";
+    templatePath = "./client/emailTemplates/" + template + ".html";
     templateContent = fs.readFileSync(templatePath, encoding = "utf8");
     newContent = templateContent;
     JSONforEach(params, function(key, entry) {

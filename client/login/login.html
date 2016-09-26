@@ -1,0 +1,54 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">WebSiteName</a>
+		</div>
+		<ul class="nav navbar-nav"></ul>
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href="#/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+			<li><a href="#/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+		</ul>
+	</div>
+</nav>
+
+<div class="container container-mrg-lg">
+	<div class="row">
+		<div class="col-sm-4 col-sm-offset-4">
+			<div class="panel panel-default" ng-controller='loginCtrl'>
+				<div class="panel-body">
+					<div class="page-header" style="text-align: center; margin-top: 10px">
+                        <img src="http://res.cloudinary.com/dfs2je0ss/image/upload/v1474900062/logo_djcykg.png" width="180px" >
+                        <h4 id="tables">Login</h4>
+                    </div>
+                    <ul class="list-group">
+                    	<li class="list-group-item">
+		                   	<form class="form" name="form" ng-submit="login(form)">
+								<div class="form-group">
+				        			<label>Email</label>
+				        			<input type="email" name="email" class="form-control" ng-model="user.email" required>
+				        		</div>
+				        		<div class="form-group">
+				        			<label>Password</label>
+				        			<input type="password" name="password" class="form-control" ng-model="user.password" required>
+				        		</div>
+				        		<div class="row">
+				        			<div class="col-sm-12">
+						        		<button class="btn btn-primary btn-block" type="submit">
+						        			Login
+						        		</button>
+				        			</div>
+				        		</div> 
+							</form>
+                    	</li>
+                    </ul>
+					
+					<div class="container-mrg">
+						<div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="	closeAlert($index)">{{alert.msg}}</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>
