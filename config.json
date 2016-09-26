@@ -9,6 +9,7 @@
     "password": "rout_main6",
     "lastName": "Admin"
   },
+  "client": "./client",
   "serverSecret": "supersecret",
   "domain": "https://peaceful-sea-67579.herokuapp.com/"
 }

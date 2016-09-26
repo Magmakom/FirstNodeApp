@@ -1,5 +1,6 @@
 var nodemailer = require('nodemailer');
 var log = require('./log')(module);
+var config = require('./config');
 var transporter = nodemailer.createTransport('smtps://nodesynebo%40gmail.com:rout_main@smtp.gmail.com');
 var fs = require('fs');
 
@@ -20,7 +21,7 @@ function sendMail(to, params, template, subject) {
 }
 
 function getTemplate(params, template) {
-    templatePath = "./client/emailTemplates/" + template + ".html";
+    templatePath = config.get('client') + "/emailTemplates/" + template + ".html";
     templateContent = fs.readFileSync(templatePath, encoding = "utf8");
     newContent = templateContent;
     JSONforEach(params, function(key, entry) {
