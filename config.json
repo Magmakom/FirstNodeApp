@@ -2,13 +2,13 @@
   "port": 3000,
   "tokenLife": "24h",
   "mongoose": {
-      "uri": "mongodb://localhost/firstApp"
+      "uri": "mongodb://nodesynebo:rout_main6@ds021346.mlab.com:21346/peacful_base"
   },
   "admin": {
     "email": "nodesynebo@gmail.com",
-    "password": "rout_main",
+    "password": "rout_main6",
     "lastName": "Admin"
   },
   "serverSecret": "supersecret",
-  "domain": "http://192.168.0.102"
+  "domain": "https://peaceful-sea-67579.herokuapp.com/"
 }
