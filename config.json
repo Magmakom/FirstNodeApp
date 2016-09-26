@@ -1,0 +1,9 @@
+{
+  "port": 3000,
+  "tokenLife": "24h",
+  "mongoose": {
+      "uri": "mongodb://localhost/firstApp"
+  },
+  "serverSecret": "supersecret",
+  "domain": "http://192.168.0.102"
+}
