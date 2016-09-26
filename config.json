@@ -11,5 +11,5 @@
   },
   "client": "./client",
   "serverSecret": "supersecret",
-  "domain": "https://peaceful-sea-67579.herokuapp.com/"
+  "domain": "https://peaceful-sea-67579.herokuapp.com"
 }

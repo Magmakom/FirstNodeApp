@@ -105,7 +105,7 @@ exports.approve = function(req, res, next) {
         }
         params = {
             "{!username}": user.name,
-            "{!loginLink}": config.get('domain') + ':' + config.get('port') + '/#/login?token=' + generateToken(user)
+            "{!loginLink}": config.get('domain') + ':' + (process.env.PORT || config.get('port')) + '/#/login?token=' + generateToken(user)
         };
         if (template) mailer.sendMail(user.email, params, template, "Subj");
     });
