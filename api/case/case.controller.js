@@ -121,7 +121,7 @@ exports.approve = function(req, res, next) {
             }
             params = {
                 "{!username}": user.name,
-                "{!casenumber}": user.number
+                "{!casenumber}": user.cases[0].number
             };
             if (template) mailer.sendMail(user.email, params, template, "Subj");
         }

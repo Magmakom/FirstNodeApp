@@ -62,7 +62,11 @@ exports.role = function(req, res) {
 };
 
 exports.users = function(req, res) {
-    User.find({}, 'lastName firstName email city phoneOffice phoneCell role created status', function(err, users) {
+    User.find({
+        role: {
+            '$ne': 'admin'
+        }
+    }, 'lastName firstName email city phoneOffice phoneCell role created status', function(err, users) {
         if (err) return res.status(500).send(err);
         userMap = {};
         users.forEach(function(user) {
