@@ -98,9 +98,10 @@ exports.approve = function(req, res, next) {
                 success: true,
             });
         })
+        var template;
         if (status === "approved") {
             template = "signup.approve";
-        } else if (status === "reject") {
+        } else if (status === "rejected") {
             template = "signup.reject";
         }
         params = {

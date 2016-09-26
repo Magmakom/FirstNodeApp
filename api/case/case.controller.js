@@ -113,9 +113,10 @@ exports.approve = function(req, res, next) {
             res.json({
                 success: true
             });
+            var template;
             if (status === "approved") {
                 template = "case.approve";
-            } else if (status === "reject") {
+            } else if (status === "rejected") {
                 template = "case.reject";
             }
             params = {
