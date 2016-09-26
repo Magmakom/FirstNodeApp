@@ -2,6 +2,7 @@
   "name": "first_node_app",
   "version": "0.0.1",
   "private": true,
+  "main": "app.js",
   "scripts": {
     "start": "node app.js"
   },
@@ -17,5 +18,8 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "winston": "~0.7.2"
-  }
+  },
+  "engines": {
+    "node": "4.5.0"
+  },
 }
