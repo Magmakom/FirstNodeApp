@@ -26649,3 +26649,15 @@
 {"level":"info","message":"Body: {}","timestamp":"2016-09-26T13:37:51.024Z"}
 {"level":"info","message":"GET /api/users","timestamp":"2016-09-26T13:37:51.092Z"}
 {"level":"info","message":"Body: {}","timestamp":"2016-09-26T13:37:51.092Z"}
+{"level":"info","message":"GET /api/users/role","timestamp":"2016-09-26T13:45:19.739Z"}
+{"level":"info","message":"Body: {}","timestamp":"2016-09-26T13:45:19.740Z"}
+{"level":"info","message":"GET /api/users","timestamp":"2016-09-26T13:45:19.811Z"}
+{"level":"info","message":"Body: {}","timestamp":"2016-09-26T13:45:19.812Z"}
+{"level":"info","message":"GET /api/users/role","timestamp":"2016-09-26T13:46:05.478Z"}
+{"level":"info","message":"Body: {}","timestamp":"2016-09-26T13:46:05.478Z"}
+{"level":"info","message":"GET /api/users","timestamp":"2016-09-26T13:46:05.544Z"}
+{"level":"info","message":"Body: {}","timestamp":"2016-09-26T13:46:05.544Z"}
+{"level":"info","message":"GET /api/users/role","timestamp":"2016-09-26T13:46:10.077Z"}
+{"level":"info","message":"Body: {}","timestamp":"2016-09-26T13:46:10.078Z"}
+{"level":"info","message":"GET /api/users","timestamp":"2016-09-26T13:46:10.126Z"}
+{"level":"info","message":"Body: {}","timestamp":"2016-09-26T13:46:10.126Z"}
