@@ -46,21 +46,8 @@ var mongoose = require('mongoose'),
             required: true
         },
         cases: [{
-            number: {
-                type: String
-            },
-            name: {
-                type: String,
-                required: true
-            },
-            body: {
-                type: String,
-                default: '{}'
-            },
-            status: {
-                type: String,
-                default: "waiting"
-            }
+            type: Schema.Types.ObjectId,
+            ref: 'Case'
         }]
     });
 

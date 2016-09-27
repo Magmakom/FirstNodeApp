@@ -27,6 +27,7 @@ exports.signup = function(req, res) {
                 success: false
             });
         }
+        log.info('user ' + req.body.email + ' was created');
         res.json({
             success: true,
             message: 'user ' + req.body.email + ' was created'
@@ -35,7 +36,7 @@ exports.signup = function(req, res) {
         params = {
             "{!username}": user.name
         };
-        mailer.sendMail(user.email, params, template, "Subj");
+        mailer.sendMail(user.email, params, template, "User stored");
     })
 };
 
@@ -112,7 +113,7 @@ exports.approve = function(req, res, next) {
             "{!username}": user.name,
             "{!loginLink}": config.get('domain') + '/#/login?token=' + generateToken(user)
         };
-        if (template) mailer.sendMail(user.email, params, template, "Subj");
+        if (template) mailer.sendMail(user.email, params, template, "User " + status);
     });
 }
 
@@ -133,6 +134,10 @@ exports.changePassword = function(req, res, next) {
         }
     });
 };
+
+exports.resetPassword = function(req, res, next) {
+
+}
 
 function generateToken(user) {
     token = jwt.sign({

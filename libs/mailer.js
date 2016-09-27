@@ -6,7 +6,7 @@ var fs = require('fs');
 
 function sendMail(to, params, template, subject) {
     var mailOptions = {
-        from: '"Admin" <admin@nodemailer.com>',
+        from: '"Admin" <nodesynebo@gmail.com>',
         to: to,
         subject: subject,
         html: getTemplate(params, template)
@@ -16,7 +16,7 @@ function sendMail(to, params, template, subject) {
         if (error) {
             return log.info(error);
         }
-        log.info('Mail sent to: ' + to);
+        log.info('Mail sended to ' + to);
     });
 }
 
