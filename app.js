@@ -19,7 +19,7 @@ require('./routes')(app);
 
 app.listen(process.env.PORT || config.get('port'), function() {
     log.info('Environment= ' + process.env);
-    log.info('Running on port ' + config.get('port') + '!');
+    log.info('Running on port ' + process.env.PORT || config.get('port'));
 });
 
 exports = module.exports = app;
