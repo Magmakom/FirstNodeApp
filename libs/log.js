@@ -1,8 +1,10 @@
+var mkdirp = require('mkdirp');
 var winston = require('winston');
 
 winston.emitErrs = true;
 
 function logger(module) {
+    mkdirp(process.cwd() + '/logs', function(err) {});
     return new winston.Logger({
         transports: [
             new winston.transports.File({
