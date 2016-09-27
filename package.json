@@ -12,6 +12,7 @@
     "express": "^4.8.0",
     "fs": "0.0.1-security",
     "jsonwebtoken": "^7.1.9",
+    "mkdirp": "^0.5.1",
     "mongoose": "^4.6.0",
     "nconf": "~0.6.8",
     "nodemailer": "^2.6.4",
