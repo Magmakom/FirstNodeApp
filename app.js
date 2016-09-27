@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({
 require('./routes')(app);
 
 app.listen(process.env.PORT || config.get('port'), function() {
-    log.info('Environment= ' + process.env);
+    log.info('Environment:\n' + JSON.stringify(process.env));
     log.info('Running on port ' + process.env.PORT || config.get('port'));
 });
 
