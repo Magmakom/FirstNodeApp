@@ -1,26 +1,27 @@
 {
-  "name": "first_node_app",
-  "version": "0.0.1",
-  "private": true,
-  "main": "app.js",
-  "scripts": {
-    "start": "node app.js"
-  },
-  "dependencies": {
-    "body-parser": "^1.15.2",
-    "composable-middleware": "^0.3.0",
-    "express": "^4.8.0",
-    "fs": "0.0.1-security",
-    "jsonwebtoken": "^7.1.9",
-    "mkdirp": "^0.5.1",
-    "mongoose": "^4.6.0",
-    "nconf": "~0.6.8",
-    "nodemailer": "^2.6.4",
-    "passport": "^0.3.2",
-    "passport-local": "^1.0.0",
-    "winston": "~0.7.2"
-  },
-  "engines": {
-    "node": "4.5.0"
-  }
+    "name": "first_node_app",
+    "version": "0.0.1",
+    "private": true,
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js"
+    },
+    "dependencies": {
+        "body-parser": "^1.15.2",
+        "composable-middleware": "^0.3.0",
+        "express": "^4.8.0",
+        "fs": "0.0.1-security",
+        "jsonwebtoken": "^7.1.9",
+        "mkdirp": "^0.5.1",
+        "mongoose": "^4.6.0",
+        "nconf": "~0.6.8",
+        "nodemailer": "^2.6.4",
+        "passport": "^0.3.2",
+        "passport-local": "^1.0.0",
+        "winston": "~0.7.2"
+    },
+    "engines": {
+        "node": "4.5.0"
+    },
+    "license": "UNLICENSED"
 }

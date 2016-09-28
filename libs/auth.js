@@ -53,20 +53,14 @@ function isAuthenticated() {
             if (token) {
                 jwt.verify(token, config.get('serverSecret'), function(err, decoded) {
                     if (err) {
-                        return res.json({
-                            success: false,
-                            message: 'Failed to authenticate token.'
-                        });
+                        res.status(403).send('Forbidden');
                     } else {
                         req.decoded = decoded;
                         next();
                     }
                 });
             } else {
-                return res.status(403).send({
-                    success: false,
-                    message: 'No token provided.'
-                });
+                return res.status(403).send('Forbidden');
             }
         })
 }
@@ -77,7 +71,7 @@ function isApproved() {
             var token = req.body.token || req.query.token || req.headers['x-access-token'];
             if (token) {
                 User.findById(jwt.decode(token).id, 'name status', function(err, user) {
-                    if (err) return res.status(500).send(err);
+                    if (err) return res.status(403).send('Forbidden');
                     if (!user) return validationError;
                     if (user.status === 'approved') {
                         next();
@@ -95,7 +89,7 @@ function isAdmin() {
             var token = req.body.token || req.query.token || req.headers['x-access-token'];
             if (token) {
                 User.findById(jwt.decode(token).id, 'name role', function(err, user) {
-                    if (err) return res.status(500).send(err);
+                    if (err) return res.status(403).send('Forbidden');
                     if (!user) return validationError;
                     if (user.role === 'admin') {
                         next();
@@ -107,6 +101,28 @@ function isAdmin() {
         })
 }
 
+function generateLoginToken(user) {
+    token = jwt.sign({
+        id: user.id,
+        role: user.role
+    }, config.get('serverSecret'), {
+        expiresIn: config.get('tokenLoginLife')
+    });
+    return token;
+}
+
+function generateResetToken(user) {
+    token = jwt.sign({
+        email: user.email,
+        role: user.role
+    }, config.get('serverSecret'), {
+        expiresIn: config.get('tokenResetLife')
+    });
+    return token;
+}
+
+exports.generateResetToken = generateResetToken;
+exports.generateLoginToken = generateLoginToken;
 exports.isAuthenticated = isAuthenticated;
 exports.isApproved = isApproved;
 exports.isAdmin = isAdmin;

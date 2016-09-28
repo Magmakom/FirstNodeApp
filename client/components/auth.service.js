@@ -63,6 +63,28 @@ app.factory('Auth', function($rootScope, $http, $cookies, $q, User, Router){
 		},
 		getToken: function() {
 			return $cookieStore.get('token');
+		},
+		sendPasswordEmail : function(emailItem) {
+			var deferred = $q.defer();
+			$http.post(Router.get('sendPassEmail'), {
+				email : emailItem
+			}).success (function (data) {
+				deferred.resolve(data);
+			}).error(function (err) {
+				deferred.reject(err);
+			});
+			return deferred.promise;
+		},
+		newPassword : function(password) {
+			var deferred = $q.defer();
+			$http.post(Router.get('newPass'), {
+				newPassword : password
+			}).success (function (data) {
+				deferred.resolve(data);
+			}).error(function (err) {
+				deferred.reject(err);
+			});
+			return deferred.promise;
 		}
 	};
 });

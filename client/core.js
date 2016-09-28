@@ -1,4 +1,4 @@
-var app = angular.module('Main', ['ngRoute', 'ui.bootstrap', 'ngResource', 'ngCookies']);
+var app = angular.module('Main', ['ngRoute', 'ui.bootstrap', 'ui.bootstrap.modal', 'ngResource', 'ngCookies']);
 
 app.config(function ($routeProvider, $locationProvider, $httpProvider) {
  	$routeProvider.
@@ -25,6 +25,14 @@ app.config(function ($routeProvider, $locationProvider, $httpProvider) {
         .when('/admin/cases', {
             templateUrl: 'admin/admin.cases.html',
             controller : 'adminCasesCtrl'
+        })
+        .when('/password', {
+            templateUrl : 'password/password.html',
+            controller : 'passwordCtrl'
+        })
+        .when('/password/:token', {
+            templateUrl : 'password/password.html',
+            controller : 'passwordCtrl'
         })
 		.otherwise({
 		    redirectTo: '/login'

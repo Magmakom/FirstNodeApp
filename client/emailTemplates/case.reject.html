@@ -1,64 +1,65 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<style type="text/css">
-		</style>
 	</head>
-	<body bgcolor="#b3b3b3" marginwidth="0" marginheight="0" leftmargin="0" topmargin="0" style="font-family: proxima-nova, sans-serif; margin:0; padding:0; min-width: 100%; -webkit-text-size-adjust:none; -ms-	text-size-adjust:none;">
+	<body marginwidth="0" marginheight="0" leftmargin="0" topmargin="0" style=" font-family:Arial,serif; margin:0; padding:0; min-width: 100%; -webkit-text-size-adjust:none; -ms-	text-size-adjust:none;">
+	<table style="padding:20px 0px 20px 0px; background-color:#d9d9d9; " width="100%" height="100%">
+	<tr>
+	<td>
 		<!-- Start Wrapper  -->
 		<center style="margin-top: 15px">
-		<table width="640" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#FFFFFF">
+		<table width="670" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#FFFFFF" style="background-color:#fff; border:1px solid #999999;">
 		    <tr>
-		        <td height="10" style="font-size:14px; line-height:10px;">   </td><!-- Spacer -->
-		    </tr>
+		    	<td>
+		    		<table>
+		    			<tr>
+		    				<td>
+		    					<img src="http://res.cloudinary.com/dfs2je0ss/image/upload/v1474900062/logo_djcykg.png" height="150px" style="margin-right: 10px">
+		    				</td>
+		    				<td style=" font-size:12px; line-height:18px; color:#000; padding:20px 20px 20px 30px; background-color:#fff;">
+		             			<h2 style="margin: 15px">Federation of jewish communities of the CIS</h2>
+		                		{!currentDate}
+		        			</td>		
+		    			</tr>
+		    		</table>	
+		    	</td>
+		    </tr> 
 		    <tr>
-		        <td align="center">
-		            <!-- Start Container  -->
-		            <table width="640" cellpadding="0" cellspacing="0" border="0" class="container">
-		                <tr>
-		                    <td width="400" style=" font-size:14px; line-height:18px; color:white; padding:20px; background-color:#0099ff;">
-		                    	<h2 style="margin: 15px">Case rejected</h2>
-		                        Your Case rejected.
-		                    </td>
-		                    <td style=" font-size:12px; line-height:18px; color:white; padding:20px; background-color:#0052cc;">
-		                    	<h2 style="margin: 15px">Company Name</h2>
-		                        Serious compay info 2016.
-		                    </td>
-		                </tr>
-		            </table>
-		            <!-- Start Container  -->      
+		        <td style=" font-size:14px; line-height:18px; color:white; padding:20px; background-color:#0099ff;">
+		        	<h2 style="margin: 15px">Case {!casetype} rejected</h2>
+		            Your Case rejected.
 		        </td>
 		    </tr>
 		    <tr>
 		        <td height="10" style="font-size:10px; line-height:10px;"> </td><!-- Spacer -->
 		    </tr> 
 		    <tr>
-		    	<td>
-		    		<!-- Start Container  -->
-		            <table width="640" cellpadding="0" cellspacing="0" border="0" class="container" bgcolor="#FFFFFF">
-		                <tr>
-		                    <td width="600" style=" font-size:14px; line-height:18px; padding:30px;">
-		                    	<h3 style="margin: 15px">Dear {!username},</h3>
-		                        Thank You in advance! Unfortunately Your Case #{!casenumber} have been rejected.
-		                    </td>
-		                </tr>
-		                <tr>
-		                	<td width="600" style=" font-size:14px; line-height:18px; padding:30px;">
-		                		Please contact with us for more information
-		                	</td>
-		                	
-		                </tr>
-		                <tr>
-		                    <td width="600" style=" font-size:12px; line-height:18px; padding:20px; text-align: right; color:white; padding:20px; background-color:#0052cc;">
-		                        Company Name. 2016
-		                    </td>
-		                </tr>
-		            </table>
-		            <!-- Start Container  --> 
-		    	</td>
-		    </tr>                         
+		        <td width="600" style=" font-size:14px; line-height:18px; padding:30px; padding-bottom: 50px;">
+		        	<h3 style="margin: 15px">Dear {!username},</h3>
+		            Thank You in advance! Unfortunately Your Case #{!casenumber} have been rejected. <br><br>
+					Please contact with us for more information
+		        </td>
+		    </tr>	
+		    <tr>
+		        <td  style=" font-size:12px; line-height:18px; padding:25px; color:white !important; padding: 20px 20px 20px 20px; background-color:#05f;">
+		            <img src="http://res.cloudinary.com/dfs2je0ss/image/upload/v1474888627/email-icon_xirtm3.png" height="15px" style="margin-right: 10px"> Email : {!companyEmail}
+		        </td>
+		    </tr>                        
 		</table> 
 		</center>
 		<!-- End Wrapper  -->    
+	</td>
+	</tr>
+	<tr>
+		<td style="padding:10px 0px 20px 0px; font-size:12px; color:#555  !important;">
+			<center style="margin-top: 10px">
+				Federation of jewish communities of the CIS. {!currentYear}
+			</center>
+			<center style="margin-top: 10px">
+				{!site}
+			</center>
+		</td>
+	</tr>
 	</body>
 </html>
+

@@ -7,7 +7,10 @@ app.factory('Router', function() {
 		'role'			: '/api/users/role',
 		'allCases' 		: '/api/cases',
 		'addCase' 		: '/api/cases/add',
-		'approveCase'	: '/api/cases/approve'
+		'approveCase'	: '/api/cases/approve',
+		'getUserCases'	: '/api/cases/usercases',
+		'sendPassEmail'	: '/api/users/resetPassword',
+		'newPass'		: '/api/users/newPassword'
 	};
 	return {
 		get : function (key) {

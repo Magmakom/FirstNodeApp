@@ -2,13 +2,13 @@ app.controller('userCtrl', function ($scope, Auth, $location, Router, Case, $uib
 	$scope.alerts = [];
 	$scope.model = {
 		forms : {
-			'Visa to Russia issue' 			: { view:false },
+			'Visa to Russia issue' 			: { view:true },
 			'Visa to Ukraine issue' 		: { view:false },
 			'Airport transfer equipment' 	: { view:false },
 			'Banking' 						: { view:false },
 			'Credit Debit' 					: { view:false },
 			'Purchase' 						: { view:false },
-			'Other' 						: { view:true }
+			'Other' 						: { view:false }
 		},
 		lastFormName : ''
 	};
@@ -25,6 +25,14 @@ app.controller('userCtrl', function ($scope, Auth, $location, Router, Case, $uib
 	$scope.popup1 = {
   		opened: false
   	};
+
+  	$scope.change = function(dateItem) {
+  		console.log(datefield);
+		if (dateItem.getTime()> new Date().getTime())
+			$scope.formbanking.datefield.$setValidity("required",true);
+		else 
+			$scope.formbanking.datefield.$setValidity("required",false);
+	}
 
 
 	$scope.view = function (formnName) {
@@ -56,7 +64,7 @@ app.controller('userCtrl', function ($scope, Auth, $location, Router, Case, $uib
 			if ($scope.alerts.length > 0) {
 				$scope.closeAlert(0);
 			}
-			$scope.alerts.push({ type : 'success', msg : 'Case successfully added. We will send fonfirmation email after approving' });
+			$scope.alerts.push({ type : 'success', msg : 'Case successfully added. We will send confirmation email after approving' });
 		}, function (error) {
 			console.log('error');
 			if ($scope.alerts.length > 0) {

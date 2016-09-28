@@ -1,14 +1,18 @@
 var path = require('path');
-var log = require('./libs/log')(module);
+var log  = require('./libs/log')(module);
 
 module.exports = function(app) {
-
+    // Custom HTTP logger
     app.use('/', function(req, res, next) {
-        log.info(req.method + ' ' + req.originalUrl);
-        log.info('Body: ' + JSON.stringify(req.body));
+        log.info(req.method + ' ' + req.originalUrl.split('?')[0]);
+        if (req.body) log.info('Body: ' + JSON.stringify(req.body));
+        for (var propName in req.query) {
+            if (req.query.hasOwnProperty(propName)) {
+                log.info('Query.' + propName + ': ' + req.query[propName]);
+            }
+        }
         next();
     })
-
     app.use('/api/cases', require('./api/case'));
     app.use('/api/users', require('./api/user'));
 
@@ -36,4 +40,4 @@ module.exports = function(app) {
             root: path.join(__dirname, config.get('client'))
         })
     });
-};;
+};

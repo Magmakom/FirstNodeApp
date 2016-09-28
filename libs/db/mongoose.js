@@ -3,6 +3,7 @@ var log = require('../log')(module);
 var config = require('../config');
 var utils = require('../utils');
 
+mongoose.Promise = global.Promise;
 mongoose.connect(config.get('mongoose:uri'));
 
 var db = mongoose.connection;

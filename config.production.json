@@ -1,6 +1,7 @@
 {
   "port": 3000,
-  "tokenLife": "24h",
+  "tokenResetLife": "1h",
+  "tokenLoginLife": "24h",
   "mongoose": {
       "uri": "mongodb://nodesynebo:rout_main6@ds021346.mlab.com:21346/peacful_base"
   },

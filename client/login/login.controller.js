@@ -1,4 +1,4 @@
-app.controller('loginCtrl', function($scope, $rootScope, $http, $location, Auth, $routeParams,$cookies){
+app.controller('loginCtrl', function($scope, $rootScope, $http, $location, Auth, $routeParams, $cookies){
 	$scope.user = {};
 	$scope.alerts = [];
 	console.log($routeParams.token);
@@ -12,18 +12,14 @@ app.controller('loginCtrl', function($scope, $rootScope, $http, $location, Auth,
 	$scope.login = function(){
 		Auth.login($scope.user)
 			.then(function (data) {
-				console.log('success');
 				if (Auth.isAdmin()) {
-					console.log('go to user');
 					$location.url('/admin/users');
 				}
 				if (Auth.isUser()) {
-					console.log('go to admin');
 					$location.url('/user');
 				} 
 
 			}, function (error) {
-				console.log('error');
 				$scope.alerts = [];
 				$scope.alerts.push({ type : 'danger', msg : 'Authentication failed.' });
 			}

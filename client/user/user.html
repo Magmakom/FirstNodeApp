@@ -12,12 +12,14 @@
 
 <div class="container container-mrg-lg">
 	<div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 id="tables">User Panel</h4>
+        </div>
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="page-header" style="text-align: center; margin-top: 10px">
                         <img src="http://res.cloudinary.com/dfs2je0ss/image/upload/v1474900062/logo_djcykg.png" width="180px" >
-                        <h3 id="tables">User Panel</h3>
                     </div>
                 </div>
             </div>
@@ -26,263 +28,617 @@
                     <div class="btn-group-vertical col-sm-12">
                         <button type="button" class="btn btn-default btn-block btn-pdd" ng-repeat="(key,value) in model.forms" ng-click="view(key)">{{key}}</button>
                     </div>
-                    
                 </div>
                 <div class="col-sm-9">
+
+                    <!-- Visa to Russia issue -->
                     <div class="thumbnail container-pdd" ng-show="model.forms['Visa to Russia issue'].view">
-                        <form class="form-horizontal" name="form" ng-submit="submit('Visa to Russia issue')">
+                        <form class="form-horizontal" name="formRussiaVisa" ng-submit="submit('Visa to Russia issue')" novalidate>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-8">
                                     <h4>Visa to Russia issue</h4>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="control-label col-sm-3">Office address</div>
+                            <div class="form-group" ng-class="[{'has-error': formRussiaVisa.officeAddress.$invalid && !formRussiaVisa.officeAddress.$pristine} , {'rmv-btm-margin': formRussiaVisa.officeAddress.$invalid && !formRussiaVisa.officeAddress.$pristine}]">
+                                <div class="control-label col-sm-3">Office address <div style="color:red;display:inline-block;">*</div></div>
                                 <div class="col-sm-8">
-                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Visa to Russia issue'].address" required>
+                                    <input type="text" 
+                                        name="officeAddress" 
+                                        class="form-control" 
+                                        ng-model="model.forms['Visa to Russia issue']['Address']" 
+                                        ng-required="true"
+                                        ng-minlength="4" 
+                                        ng-maxlength="20">
+                                    <p ng-show="formRussiaVisa.officeAddress.$error.required && !formRussiaVisa.officeAddress.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Office address required</small>
+                                    </p>
+                                    <p ng-show="formRussiaVisa.officeAddress.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To short</small>
+                                    </p>
+                                    <p ng-show="formRussiaVisa.officeAddress.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To long</small>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="[{'has-error': formRussiaVisa.passportNumber.$invalid && !formRussiaVisa.passportNumber.$pristine} , {'rmv-btm-margin': formRussiaVisa.passportNumber.$invalid && !formRussiaVisa.passportNumber.$pristine}]">
+                                <div class="control-label col-sm-3">Passport code <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="col-sm-8">
+                                    <input type="text" 
+                                        name="passportNumber" 
+                                        class="form-control" 
+                                        ng-model="model.forms['Visa to Russia issue']['Passport code']" 
+                                        ng-required="true"
+                                        ng-minlength="4" 
+                                        ng-maxlength="6">
+                                    <p ng-show="formRussiaVisa.passportNumber.$error.required && !formRussiaVisa.passportNumber.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Passport code required</small>
+                                    </p>
+                                    <p ng-show="formRussiaVisa.passportNumber.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To short</small>
+                                    </p>
+                                    <p ng-show="formRussiaVisa.passportNumber.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To long</small>
+                                    </p>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="control-label col-sm-3">Passport number</div>
-                                <div class="col-sm-8">
-                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Visa to Russia issue'].number" required>
+                                <div class="col-sm-offset-3 col-sm-4">
+                                    <small class="help-block"><div style="color:red;display:inline-block;">*</div> - Required field</small>
                                 </div>
                             </div>
                             <div class="form-group"> 
                                 <div class="col-sm-offset-3 col-sm-4">
-                                    <button type="submit" class="btn btn-primary btn-block" >Submit</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="thumbnail container-pdd" ng-show="model.forms['Visa to Ukraine issue'].view">
-                        <form class="form-horizontal" name="form" ng-submit="submit('Visa to Ukraine issue')">
-                            <div class="form-group">
-                                <div class="col-sm-offset-3 col-sm-8">
-                                    <h4>Visa to Ukraine issue</h4>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="control-label col-sm-3">Office address</div>
-                                <div class="col-sm-8">
-                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Visa to Ukraine issue'].address" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="control-label col-sm-3">Passport number</div>
-                                <div class="col-sm-8">
-                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Visa to Ukraine issue'].number" required>
-                                </div>
-                            </div>
-                            <div class="form-group"> 
-                                <div class="col-sm-offset-3 col-sm-4">
-                                    <button type="submit" class="btn btn-primary btn-block" >Submit</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="thumbnail container-pdd" ng-show="model.forms['Airport transfer equipment'].view">
-                        <form class="form-horizontal" name="form" ng-submit="submit('Airport transfer equipment')">
-                            <div class="form-group">
-                                <div class="col-sm-offset-3 col-sm-8">
-                                    <h4>Airport transfer equipment</h4>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="control-label col-sm-3">Name of equipment</div>
-                                <div class="col-sm-8">
-                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Airport transfer equipment'].name" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="control-label col-sm-3">From place</div>
-                                <div class="col-sm-8">
-                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Airport transfer equipment'].from" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="control-label col-sm-3">To place</div>
-                                <div class="col-sm-8">
-                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Airport transfer equipment'].to" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="control-label col-sm-3">Date</div>
-                                <div class="col-sm-8">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="model.forms['Airport transfer equipment'].date" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" >
-                                        <span class="input-group-btn">
-                                            <button type="button" class="btn btn-default" ng-click="open1()" style="padding:9px"><i class="glyphicon glyphicon-calendar"></i></button>
-                                        </span>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                            <div class="form-group"> 
-                                <div class="col-sm-offset-3 col-sm-4">
-                                    <button type="submit" class="btn btn-primary btn-block" >Submit</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="thumbnail container-pdd" ng-show="model.forms['Banking'].view">
-                        <form class="form-horizontal" name="form" ng-submit="submit('Banking')">
-                            <div class="form-group">
-                                <div class="col-sm-offset-3 col-sm-8">
-                                    <h4>Banking</h4>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="control-label col-sm-3">Amount ($)</div>
-                                <div class="col-sm-8">
-                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Banking'].amount" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="control-label col-sm-3">From</div>
-                                <div class="col-sm-8">
-                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Banking'].amount" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="control-label col-sm-3">To</div>
-                                <div class="col-sm-8">
-                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Banking'].amount" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="control-label col-sm-3">Additional info</div>
-                                <div class="col-sm-8">
-                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Banking'].info" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="control-label col-sm-3">Date</div>
-                                <div class="col-sm-8">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="model.forms['Banking'].date" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" >
-                                        <span class="input-group-btn">
-                                            <button type="button" class="btn btn-default" ng-click="open1()" style="padding:9px"><i class="glyphicon glyphicon-calendar"></i></button>
-                                        </span>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                            <div class="form-group"> 
-                                <div class="col-sm-offset-3 col-sm-4">
-                                    <button type="submit" class="btn btn-primary btn-block" >Submit</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="thumbnail container-pdd" ng-show="model.forms['Credit Debit'].view">
-                        <form class="form-horizontal" name="form" ng-submit="submit('Credit Debit')">
-                            <div class="form-group">
-                                <div class="col-sm-offset-3 col-sm-8">
-                                    <h4>Credit Debit</h4>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="control-label col-sm-3">Amount ($)</div>
-                                <div class="col-sm-8">
-                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Credit Debit'].amount" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="control-label col-sm-3">From</div>
-                                <div class="col-sm-8">
-                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Credit Debit'].amount" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="control-label col-sm-3">To</div>
-                                <div class="col-sm-8">
-                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Credit Debit'].amount" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="control-label col-sm-3">Additional info</div>
-                                <div class="col-sm-8">
-                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Credit Debit'].info" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="control-label col-sm-3">Date</div>
-                                <div class="col-sm-8">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="model.forms['Credit Debit'].date" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" >
-                                        <span class="input-group-btn">
-                                            <button type="button" class="btn btn-default" ng-click="open1()" style="padding:9px"><i class="glyphicon glyphicon-calendar"></i></button>
-                                        </span>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                            <div class="form-group"> 
-                                <div class="col-sm-offset-3 col-sm-4">
-                                    <button type="submit" class="btn btn-primary btn-block" >Submit</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="thumbnail container-pdd" ng-show="model.forms['Purchase'].view">
-                        <form class="form-horizontal" name="form" ng-submit="submit('Purchase')">
-                            <div class="form-group">
-                                <div class="col-sm-offset-4 col-sm-8">
-                                    <h4>Purchase</h4>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="control-label col-sm-4">Acquisition for (goods)</div>
-                                <div class="col-sm-8">
-                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Purchase'].acquisitionFor" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="control-label col-sm-4">Where (place of purchase)</div>
-                                <div class="col-sm-8">
-                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Purchase'].where" required>
-                                </div>
-                            </div>
-                            <div class="form-group"> 
-                                <div class="col-sm-offset-4 col-sm-4">
-                                    <button type="submit" class="btn btn-primary btn-block" >Submit</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="thumbnail container-pdd"  ng-show="model.forms['Other'].view">
-                        <form class="form-horizontal" name="form" ng-submit="submit('Other')">
-                            <div class="form-group">
-                                <div class="col-sm-offset-3 col-sm-8">
-                                    <h4>Other</h4>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="control-label col-sm-3">Title</div>
-                                <div class="col-sm-8">
-                                    <input type="text" name="title" class="form-control" ng-model="model.forms['Other'].title" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="control-label col-sm-3">Message</div>
-                                <div class="col-sm-8">
-                                    <textarea class="form-control"  rows="4" ng-model="model.forms['Other'].message" required>
-                                    </textarea>
-                                </div>
-                            </div>
-                            <div class="form-group"> 
-                                <div class="col-sm-offset-3 col-sm-4">
-                                    <button type="submit" class="btn btn-primary btn-block" >Submit</button>
+                                    <button type="submit" class="btn btn-primary btn-block" ng-disabled="formRussiaVisa.$invalid">Submit</button>
                                 </div>
                             </div>
                         </form>
                     </div>
 
+                    <!-- Visa to Ukraine issue -->
+                    <div class="thumbnail container-pdd" ng-show="model.forms['Visa to Ukraine issue'].view">
+                        <form class="form-horizontal" name="formUkraineVisa" ng-submit="submit('Visa to Ukraine issue')" novalidate>
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-8">
+                                    <h4>Visa to Ukraine issue</h4>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="[{'has-error': formUkraineVisa.officeAddress.$invalid && !formUkraineVisa.officeAddress.$pristine} , {'rmv-btm-margin': formUkraineVisa.officeAddress.$invalid && !formUkraineVisa.officeAddress.$pristine}]">
+                                <div class="control-label col-sm-3">Office address <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="col-sm-8">
+                                    <input type="text" 
+                                        name="officeAddress" 
+                                        class="form-control" 
+                                        ng-model="model.forms['Visa to Ukraine issue']['Address']"
+                                        ng-required="true"
+                                        ng-minlength="4" 
+                                        ng-maxlength="20">
+                                    <p ng-show="formUkraineVisa.officeAddress.$error.required && !formRussiaVisa.officeAddress.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Office address required</small>
+                                    </p>
+                                    <p ng-show="formUkraineVisa.officeAddress.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To short</small>
+                                    </p>
+                                    <p ng-show="formUkraineVisa.officeAddress.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To long</small>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="[{'has-error': formUkraineVisa.passportNumber.$invalid && !formUkraineVisa.passportNumber.$pristine} , {'rmv-btm-margin': formUkraineVisa.passportNumber.$invalid && !formUkraineVisa.passportNumber.$pristine}]">
+                                <div class="control-label col-sm-3">Passport code <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="col-sm-8">
+                                    <input type="text" 
+                                        name="passportNumber" 
+                                        class="form-control" 
+                                        ng-model="model.forms['Visa to Ukraine issue']['Passport code']" 
+                                        ng-required="true"
+                                        ng-minlength="4" 
+                                        ng-maxlength="6">
+                                    <p ng-show="formUkraineVisa.passportNumber.$error.required && !formRussiaVisa.passportNumber.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Passport code required</small>
+                                    </p>
+                                    <p ng-show="formUkraineVisa.passportNumber.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To short</small>
+                                    </p>
+                                    <p ng-show="formUkraineVisa.passportNumber.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To long</small>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-4">
+                                    <small class="help-block"><div style="color:red;display:inline-block;">*</div> - Required field</small>
+                                </div>
+                            </div>
+                            <div class="form-group"> 
+                                <div class="col-sm-offset-3 col-sm-4">
+                                    <button type="submit" class="btn btn-primary btn-block" ng-disabled="formUkraineVisa.$invalid">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Airport transfer equipment -->
+                    <div class="thumbnail container-pdd" ng-show="model.forms['Airport transfer equipment'].view">
+                        <form class="form-horizontal" name="formAirportEquip" ng-submit="submit('Airport transfer equipment')">
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-8">
+                                    <h4>Airport transfer equipment</h4>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="[{'has-error': formAirportEquip.name.$invalid && !formAirportEquip.name.$pristine} , {'rmv-btm-margin': formAirportEquip.name.$invalid && !formAirportEquip.name.$pristine}]">
+                                <div class="control-label col-sm-3">Name of equipment <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="col-sm-8">
+                                    <input type="text" 
+                                        name="name" 
+                                        class="form-control" 
+                                        ng-model="model.forms['Airport transfer equipment']['Name']" 
+                                        ng-required="true"
+                                        ng-minlength="4" 
+                                        ng-maxlength="30">
+                                    <p ng-show="formAirportEquip.name.$error.required && !formAirportEquip.name.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Name of equipment required</small>
+                                    </p>
+                                    <p ng-show="formAirportEquip.name.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To short</small>
+                                    </p>
+                                    <p ng-show="formAirportEquip.name.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To long</small>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="[{'has-error': formAirportEquip.from.$invalid && !formAirportEquip.from.$pristine} , {'rmv-btm-margin': formAirportEquip.from.$invalid && !formAirportEquip.from.$pristine}]">
+                                <div class="control-label col-sm-3">From place <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="col-sm-8">
+                                    <input type="text" 
+                                        name="from" 
+                                        class="form-control" 
+                                        ng-model="model.forms['Airport transfer equipment']['From']" 
+                                        ng-required="true"
+                                        ng-minlength="4" 
+                                        ng-maxlength="30">
+                                    <p ng-show="formAirportEquip.from.$error.required && !formAirportEquip.from.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>From place required</small>
+                                    </p>
+                                    <p ng-show="formAirportEquip.from.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To short</small>
+                                    </p>
+                                    <p ng-show="formAirportEquip.from.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To long</small>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="[{'has-error': formAirportEquip.to.$invalid && !formAirportEquip.to.$pristine} , {'rmv-btm-margin': formAirportEquip.to.$invalid && !formAirportEquip.to.$pristine}]">
+                                <div class="control-label col-sm-3">To place <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="col-sm-8">
+                                    <input type="text" 
+                                        name="to" 
+                                        class="form-control" 
+                                        ng-model="model.forms['Airport transfer equipment']['To']" 
+                                        ng-required="true"
+                                        ng-minlength="4" 
+                                        ng-maxlength="30">
+                                    <p ng-show="formAirportEquip.to.$error.required && !formAirportEquip.to.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To place required</small>
+                                    </p>
+                                    <p ng-show="formAirportEquip.to.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To short</small>
+                                    </p>
+                                    <p ng-show="formAirportEquip.to.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To long</small>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="[{'has-error': formAirportEquip.date.$invalid && !formAirportEquip.date.$pristine} , {'rmv-btm-margin': formAirportEquip.date.$invalid && !formAirportEquip.date.$pristine}]">
+                                <div class="control-label col-sm-3">Date <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <input type="text" 
+                                            name="date"
+                                            class="form-control" 
+                                            uib-datepicker-popup="{{format}}" 
+                                            ng-model="model.forms['Airport transfer equipment'].date" 
+                                            is-open="popup1.opened" 
+                                            datepicker-options="dateOptions" 
+                                            ng-required="true" 
+                                            close-text="Close" 
+                                            alt-input-formats="altInputFormats" >
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="open1()" style="padding:9px"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                    </div>
+                                    <p ng-show="formAirportEquip.date.$error.required && !formAirportEquip.date.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Date required</small>
+                                    </p>
+                                    
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-4">
+                                    <small class="help-block"><div style="color:red;display:inline-block;">*</div> - Required field</small>
+                                </div>
+                            </div>
+                            <div class="form-group"> 
+                                <div class="col-sm-offset-3 col-sm-4">
+                                    <button type="submit" class="btn btn-primary btn-block" ng-disabled="formAirportEquip.$invalid">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="thumbnail container-pdd" ng-show="model.forms['Banking'].view">
+                        <form class="form-horizontal" name="formBanking" ng-submit="submit('Banking')">
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-8">
+                                    <h4>Banking</h4>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="[{'has-error': formBanking.amount.$invalid && !formBanking.amount.$pristine} , {'rmv-btm-margin': formBanking.amount.$invalid && !formBanking.amount.$pristine}]">
+                                <div class="control-label col-sm-3">Amount ($) <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="col-sm-8">
+                                    <input type="text" 
+                                        name="amount" 
+                                        class="form-control" 
+                                        ng-model="model.forms['Banking']['Amount']" 
+                                        ng-required="true"
+                                        ng-minlength="1" 
+                                        ng-maxlength="20"
+                                        ng-pattern="/^[0-9]{1,7}$/">
+                                    <p ng-show="formBanking.amount.$error.required && !formBanking.amount.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Amount required</small>
+                                    </p>
+                                    <p ng-show="formBanking.amount.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To short</small>
+                                    </p>
+                                    <p ng-show="formBanking.amount.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To long</small>
+                                    </p>
+                                    <p ng-show="formBanking.amount.$error.pattern" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Invalid amount</small>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="[{'has-error': formBanking.from.$invalid && !formBanking.from.$pristine} , {'rmv-btm-margin': formBanking.from.$invalid && !formBanking.from.$pristine}]">
+                                <div class="control-label col-sm-3">From <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="col-sm-8">
+                                    <input type="text" 
+                                        name="from" 
+                                        class="form-control" 
+                                        ng-model="model.forms['Banking']['From']" 
+                                        ng-required="true"
+                                        ng-minlength="4" 
+                                        ng-maxlength="30">
+                                    <p ng-show="formBanking.drom.$error.required && !formBanking.drom.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>From field required</small>
+                                    </p>
+                                    <p ng-show="formBanking.drom.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To short</small>
+                                    </p>
+                                    <p ng-show="formBanking.drom.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To long</small>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="[{'has-error': formBanking.to.$invalid && !formBanking.to.$pristine} , {'rmv-btm-margin': formBanking.to.$invalid && !formBanking.to.$pristine}]">
+                                <div class="control-label col-sm-3">To <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="col-sm-8">
+                                    <input type="text" 
+                                        name="to" 
+                                        class="form-control" 
+                                        ng-model="model.forms['Banking']['To']" 
+                                        ng-required="true"
+                                        ng-minlength="4" 
+                                        ng-maxlength="30">
+                                    <p ng-show="formBanking.to.$error.required && !formBanking.to.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To field required</small>
+                                    </p>
+                                    <p ng-show="formBanking.to.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To short</small>
+                                    </p>
+                                    <p ng-show="formBanking.to.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To long</small>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="[{'has-error': formBanking.info.$invalid && !formBanking.info.$pristine} , {'rmv-btm-margin': formBanking.info.$invalid && !formBanking.info.$pristine}]">
+                                <div class="control-label col-sm-3">Additional info</div>
+                                <div class="col-sm-8">
+                                    <input type="text" 
+                                        name="info" 
+                                        class="form-control" 
+                                        ng-model="model.forms['Banking']['Addition info']" 
+                                        ng-minlength="4" 
+                                        ng-maxlength="40">
+                                    <p ng-show="formBanking.info.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To short</small>
+                                    </p>
+                                    <p ng-show="formBanking.info.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To long</small>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="[{'has-error': formBanking.date.$invalid && !formBanking.date.$pristine} , {'rmv-btm-margin': formBanking.date.$invalid && !formBanking.date.$pristine}]">
+                                <div class="control-label col-sm-3">Date <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <input type="text" 
+                                            name="date"
+                                            class="form-control" 
+                                            uib-datepicker-popup="{{format}}" 
+                                            ng-model="model.forms['Banking']['Date']" 
+                                            is-open="popup1.opened" 
+                                            datepicker-options="dateOptions" 
+                                            ng-required="true" 
+                                            close-text="Close" 
+                                            alt-input-formats="altInputFormats" >
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="open1()" style="padding:9px"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                    </div>
+                                    <p ng-show="formBanking.date.$invalid && !formBanking.date.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Invalid</small>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group"> 
+                                <div class="col-sm-offset-3 col-sm-4">
+                                    <button type="submit" class="btn btn-primary btn-block"  ng-disabled="formBanking.$invalid">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="thumbnail container-pdd" ng-show="model.forms['Credit Debit'].view">
+                        <form class="form-horizontal" name="formDebit" ng-submit="submit('Credit Debit')">
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-8">
+                                    <h4>Credit Debit</h4>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="[{'has-error': formDebit.amount.$invalid && !formDebit.amount.$pristine} , {'rmv-btm-margin': formDebit.amount.$invalid && !formDebit.amount.$pristine}]">
+                                <div class="control-label col-sm-3">Amount ($) <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="col-sm-8">
+                                    <input type="text" 
+                                        name="amount" 
+                                        class="form-control" 
+                                        ng-model="model.forms['Credit Debit']['Amount']" 
+                                        ng-required="true"
+                                        ng-minlength="1" 
+                                        ng-maxlength="20"
+                                        ng-pattern="/^[0-9]{1,7}$/">
+                                    <p ng-show="formDebit.amount.$error.required && !formDebit.amount.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Amount required</small>
+                                    </p>
+                                    <p ng-show="formDebit.amount.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To short</small>
+                                    </p>
+                                    <p ng-show="formDebit.amount.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To long</small>
+                                    </p>
+                                    <p ng-show="formDebit.amount.$error.pattern" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Invalid amount</small>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="[{'has-error': formDebit.from.$invalid && !formDebit.from.$pristine} , {'rmv-btm-margin': formDebit.from.$invalid && !formDebit.from.$pristine}]">
+                                <div class="control-label col-sm-3">From <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="col-sm-8">
+                                    <input type="text" 
+                                        name="from" 
+                                        class="form-control" 
+                                        ng-model="model.forms['Credit Debit']['From']" 
+                                        ng-required="true"
+                                        ng-minlength="4" 
+                                        ng-maxlength="30">
+                                    <p ng-show="formDebit.from.$error.required && !formDebit.from.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>From field required</small>
+                                    </p>
+                                    <p ng-show="formDebit.from.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To short</small>
+                                    </p>
+                                    <p ng-show="formDebit.from.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To long</small>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="[{'has-error': formDebit.to.$invalid && !formDebit.to.$pristine} , {'rmv-btm-margin': formDebit.to.$invalid && !formDebit.to.$pristine}]">
+                                <div class="control-label col-sm-3">To <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="col-sm-8">
+                                    <input type="text" 
+                                        name="to" 
+                                        class="form-control" 
+                                        ng-model="model.forms['Credit Debit']['To']" 
+                                        ng-required="true"
+                                        ng-minlength="4" 
+                                        ng-maxlength="30">
+                                    <p ng-show="formDebit.to.$error.required && !formDebit.to.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To field required</small>
+                                    </p>
+                                    <p ng-show="formDebit.to.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To short</small>
+                                    </p>
+                                    <p ng-show="formDebit.to.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To long</small>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="[{'has-error': formDebit.info.$invalid && !formDebit.info.$pristine} , {'rmv-btm-margin': formDebit.info.$invalid && !formDebit.info.$pristine}]">
+                                <div class="control-label col-sm-3">Additional info</div>
+                                <div class="col-sm-8">
+                                    <input type="text" 
+                                        name="info" 
+                                        class="form-control" 
+                                        ng-model="model.forms['Credit Debit']['Addition info']" 
+                                        ng-minlength="4" 
+                                        ng-maxlength="40">
+                                    <p ng-show="formDebit.to.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To short</small>
+                                    </p>
+                                    <p ng-show="formDebit.to.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To long</small>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="[{'has-error': formDebit.date.$invalid && !formDebit.date.$pristine} , {'rmv-btm-margin': formDebit.date.$invalid && !formDebit.date.$pristine}]">
+                                <div class="control-label col-sm-3">Date <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <input type="text" 
+                                            name="date"
+                                            class="form-control" 
+                                            uib-datepicker-popup="{{format}}" 
+                                            ng-model="model.forms['Credit Debit']['Date']" 
+                                            is-open="popup1.opened" 
+                                            datepicker-options="dateOptions" 
+                                            ng-required="true" 
+                                            close-text="Close" 
+                                            alt-input-formats="altInputFormats" 
+                                            ng-change="change(model.forms['Credit Debit']['Date'])">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="open1()" style="padding:9px"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                    </div>
+                                    <p ng-show="formDebit.date.$invalid && !formDebit.date.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Invalid</small>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-4">
+                                    <small class="help-block"><div style="color:red;display:inline-block;">*</div> - Required field</small>
+                                </div>
+                            </div>
+                            <div class="form-group"> 
+                                <div class="col-sm-offset-3 col-sm-4">
+                                    <button type="submit" class="btn btn-primary btn-block"  ng-disabled="formDebit.$invalid">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="thumbnail container-pdd" ng-show="model.forms['Purchase'].view">
+                        <form class="form-horizontal" name="purchase" ng-submit="submit('Purchase')">
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-8">
+                                    <h4>Purchase</h4>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="[{'has-error': purchase.acquisition.$invalid && !purchase.acquisition.$pristine} , {'rmv-btm-margin': purchase.acquisition.$invalid && !purchase.acquisition.$pristine}]">
+                                <div class="control-label col-sm-4">Acquisition for (goods) <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="col-sm-8">
+                                    <input type="text" 
+                                        name="acquisition" 
+                                        class="form-control" 
+                                        ng-model="model.forms['Purchase']['Acquisition for']" 
+                                        ng-required="true"
+                                        ng-minlength="4" 
+                                        ng-maxlength="40">
+                                    <p ng-show="purchase.acquisition.$error.required && !purchase.acquisition.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Acquisition field required</small>
+                                    </p>
+                                    <p ng-show="purchase.acquisition.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To short</small>
+                                    </p>
+                                    <p ng-show="purchase.acquisition.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To long</small>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="[{'has-error': purchase.where.$invalid && !purchase.where.$pristine} , {'rmv-btm-margin': purchase.where.$invalid && !purchase.where.$pristine}]">
+                                <div class="control-label col-sm-4">Where (place of purchase) <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="col-sm-8">
+                                    <input type="text" 
+                                        name="where" 
+                                        class="form-control" 
+                                        ng-model="model.forms['Purchase']['Where']" 
+                                        ng-required="true"
+                                        ng-minlength="4" 
+                                        ng-maxlength="40">
+                                    <p ng-show="purchase.where.$error.required && !purchase.where.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Where field required</small>
+                                    </p>
+                                    <p ng-show="purchase.where.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To short</small>
+                                    </p>
+                                    <p ng-show="purchase.where.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To long</small>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-4">
+                                    <small class="help-block"><div style="color:red;display:inline-block;">*</div> - Required field</small>
+                                </div>
+                            </div>
+                            <div class="form-group"> 
+                                <div class="col-sm-offset-4 col-sm-4">
+                                    <button type="submit" class="btn btn-primary btn-block" ng-disabled="purchase.$invalid">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="thumbnail container-pdd"  ng-show="model.forms['Other'].view">
+                        <form class="form-horizontal" name="formOther" ng-submit="submit('Other')">
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-8">
+                                    <h4>Other</h4>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="[{'has-error': formOther.title.$invalid && !formOther.title.$pristine} , {'rmv-btm-margin': formOther.title.$invalid && !formOther.title.$pristine}]" >
+                                <div class="control-label col-sm-3">Title <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="col-sm-8">
+                                    <input type="text" 
+                                        name="title" 
+                                        class="form-control" 
+                                        ng-model="model.forms['Other']['Title']" 
+                                        ng-required="true"
+                                        ng-minlength="4" 
+                                        ng-maxlength="20">
+                                    <p ng-show="formOther.title.$error.required && !formOther.title.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Title required</small>
+                                    </p>
+                                    <p ng-show="formOther.title.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To short</small>
+                                    </p>
+                                    <p ng-show="formOther.title.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To long</small>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="[{'has-error': formOther.msg.$invalid && !formOther.msg.$pristine} , {'rmv-btm-margin': formOther.msg.$invalid && !formOther.msg.$pristine}]">
+                                <div class="control-label col-sm-3">Message <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" 
+                                        name="msg" 
+                                        rows="4" 
+                                        ng-model="model.forms['Other']['Message']" 
+                                        ng-required="true"
+                                        ng-minlength="4" 
+                                        ng-maxlength="100">
+                                    </textarea>
+                                    <p ng-show="formOther.msg.$error.required && !formOther.msg.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Message required</small>
+                                    </p>
+                                    <p ng-show="formOther.msg.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To short</small>
+                                    </p>
+                                    <p ng-show="formOther.msg.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To long</small>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-4">
+                                    <small class="help-block"><div style="color:red;display:inline-block;">*</div> - Required field</small>
+                                </div>
+                            </div>
+                            <div class="form-group"> 
+                                <div class="col-sm-offset-3 col-sm-4">
+                                    <button type="submit" class="btn btn-primary btn-block" ng-disabled="formOther.$invalid" >Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
 					<div class="container-mrg">
                         <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="  closeAlert($index)">{{alert.msg}}</div>
                     </div>
 				</div>
+
+                
 			</div>
 		</div>
 	</div>

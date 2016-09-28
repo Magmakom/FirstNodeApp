@@ -1,4 +1,4 @@
-app.controller('adminCasesCtrl', function($scope, $http, Auth, $location, Case, Router){
+app.controller('adminCasesCtrl', function($scope, $http, Auth, $location, Case, Router, $uibModal){
 	$scope.model = {
 		search : '',
 		cases : [],
@@ -19,29 +19,65 @@ app.controller('adminCasesCtrl', function($scope, $http, Auth, $location, Case, 
         }
     });
 
+    $scope.openDetails = function (caseModel) {
+        console.log(caseModel);
+        var modalInstance = $uibModal.open({
+            animation: true,
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: 'caseDetailsModal.html',
+            controller: 'CaseDetailsCtrl',
+            resolve: {
+                model: function () {
+                    return caseModel;
+                }
+            }
+        }).result.then(function (result) {
+            // $ctrl.selected = selectedItem;
+        }, function (result) {
+            console.log('closed!');
+        });
+    };
+
+    $scope.openResult = function (resultModel) {
+        console.log(resultModel);
+        var modalInstance = $uibModal.open({
+            animation: true,
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: 'resultModal.html',
+            controller: 'CaseResultModalCtrl',
+            size : 'sm',
+            resolve: {
+                model: function () {
+                    return resultModel;
+                }
+            }
+        }).result.then(function (result) {
+            // $ctrl.selected = selectedItem;
+        }, function (result) {
+            console.log('closed!');
+        });
+    };
+
 	$scope.approve = function(id) {
-    	console.log(id);
     	var caseItem = angular.copy($scope.model.caseMap[id]);
     	caseItem.status = 'approved';
     	Case.approving(caseItem).then( function (data) {
-            console.log('success');
+            $scope.openResult({type : 'success', message : 'Case successfully approved'});
     		$scope.model.caseMap[id].status = 'approved';
     	}, function (err){
-            console.log('err');
-            $scope.alerts = [];
-    		$scope.alerts.push({ type : 'danger', msg : 'Approving failed.' });
+            $scope.openResult({type : 'danger', message: ' Approving failed.' + err});
     	});
     }
     $scope.reject = function(id) {
-        console.log(id);
         var caseItem = angular.copy($scope.model.caseMap[id]);
         caseItem.status = 'rejected';
         Case.approving(caseItem).then( function (data) {
+            $scope.openResult({type : 'success', message : 'Case successfully rejected'});
             $scope.model.caseMap[id].status = 'rejected';
         }, function (err){
-            console.log('err');
-            $scope.alerts = [];
-            $scope.alerts.push({ type : 'danger', msg : 'Rejection failed.' });
+            $scope.openResult({type : 'danger', message: ' Rejection failed.' + err});
         });
     }
 	
@@ -53,4 +89,66 @@ app.controller('adminCasesCtrl', function($scope, $http, Auth, $location, Case, 
     $scope.closeAlert = function(index) {
 		$scope.alerts.splice(index, 1);
 	};
+});
+
+
+app.controller('CaseDetailsCtrl', function($uibModalInstance, $uibModal, model, $scope, Case){
+    console.log(model);
+    $scope.model = model;
+    $scope.cancel = function() {
+        $uibModalInstance.dismiss('cancel');
+    }
+
+    $scope.approve = function(id) {
+        var caseItem = angular.copy($scope.model);
+        caseItem.status = 'approved';
+        Case.approving(caseItem).then( function (data) {
+            $scope.model.status = 'approved';
+            $scope.openResult({type : 'success', message : 'Case successfully approved'});
+            $uibModalInstance.dismiss('cancel');
+        }, function (err){
+            $scope.openResult({type : 'danger', message: ' Approving failed.' + err});
+            $uibModalInstance.dismiss('cancel');
+        });
+    }
+    $scope.reject = function(id) {
+        var caseItem = angular.copy($scope.model);
+        caseItem.status = 'rejected';
+        Case.approving(caseItem).then( function (data) {
+            $scope.model.status = 'rejected';
+            $scope.openResult({type : 'success', message : 'Case successfully rejected'});
+            $uibModalInstance.dismiss('cancel');
+        }, function (err){
+            $scope.openResult({type : 'danger', message: ' Rejection failed.' + err});
+            $uibModalInstance.dismiss('cancel');
+        });
+    }
+
+    $scope.openResult = function (resultModel) {
+        console.log(resultModel);
+        var modalInstance = $uibModal.open({
+            animation: true,
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: 'resultModal.html',
+            controller: 'CaseResultModalCtrl',
+            size : 'sm',
+            resolve: {
+                model: function () {
+                    return resultModel;
+                }
+            }
+        }).result.then(function (result) {
+            // $ctrl.selected = selectedItem;
+        }, function (result) {
+            console.log('closed!');
+        });
+    };
+});
+
+app.controller('CaseResultModalCtrl', function($uibModalInstance, model, $scope){
+    $scope.model = model;
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
 });

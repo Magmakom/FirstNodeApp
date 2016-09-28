@@ -20,63 +20,187 @@
                         <img src="http://res.cloudinary.com/dfs2je0ss/image/upload/v1474900062/logo_djcykg.png" width="180px" >
                         <h4 id="tables">Sign up</h4>
                     </div>
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <form class="form-horizontal" name="form" ng-submit="signUp(form)">
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4">First Name</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" name="email" class="form-control" ng-model="user.firstName" required>
-                                    </div>
+                    <div class="thumbnail" ng-show="model.formView">
+                        <form class="form-horizontal" name="form" ng-submit="signUp(form)" novalidate>
+                            <div class="form-group" ng-class="[{'has-error': form.firstName.$invalid && !form.firstName.$pristine} , {'rmv-btm-margin': form.firstName.$invalid && !form.firstName.$pristine}]">
+                                <label class="control-label col-sm-4">First Name</label>
+                                <div class="col-sm-8">
+                                    <input type="text" 
+                                        name="firstName" 
+                                        class="form-control"
+                                        ng-required="required"
+                                        ng-model="model.user.firstName"  
+                                        ng-minlength="4" 
+                                        ng-maxlength="20"
+                                        ng-pattern="/^[a-zA-Z0-9]*$/">
+                                    <p ng-show="form.firstName.$error.required" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Name required</small>
+                                    </p>
+                                    <p ng-show="form.firstName.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To short</small>
+                                    </p>
+                                    <p ng-show="form.firstName.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To long</small>
+                                    </p>
+                                    <p ng-show="form.firstName.$error.pattern" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Please use numbers letters only</small>
+                                    </p>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4">Last Name</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" name="email" class="form-control" ng-model="user.lastName" required>
-                                    </div>
+
+                                
+                            </div>
+                            <div class="form-group" ng-class="[{'has-error': form.lastName.$invalid && !form.lastName.$pristine} , {'rmv-btm-margin': form.lastName.$invalid && !form.lastName.$pristine}]">
+                                <label class="control-label col-sm-4">Last Name</label>
+                                <div class="col-sm-8">
+                                    <input type="text" 
+                                        name="lastName" 
+                                        class="form-control"
+                                        ng-required="required"
+                                        ng-model="model.user.lastName"
+                                        ng-minlength="4" 
+                                        ng-maxlength="20"
+                                        ng-pattern="/^[a-zA-Z0-9]*$/">
+
+                                    <p ng-show="form.lastName.$error.required" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Name required</small>
+                                    </p>
+                                    <p ng-show="form.lastName.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To short</small>
+                                    </p>
+                                    <p ng-show="form.lastName.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To long</small>
+                                    </p>
+                                    <p ng-show="form.lastName.$error.pattern" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Please use numbers letters only</small>
+                                    </p>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4">City</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" name="email" class="form-control" ng-model="user.city" >
-                                    </div>
+                            </div>
+                            <div class="form-group" ng-class="[{'has-error': form.city.$invalid && !form.city.$pristine} , {'rmv-btm-margin': form.city.$invalid && !form.city.$pristine}]">
+                                <label class="control-label col-sm-4">City</label>
+                                <div class="col-sm-8">
+                                    <input type="text" 
+                                        name="city" 
+                                        class="form-control" 
+                                        ng-model="model.user.city" 
+                                        ng-minlength="4" 
+                                        ng-maxlength="20"
+                                        ng-pattern="/[a-zA-Z0-9^ ]/">
+                                    <p ng-show="form.city.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To short</small>
+                                    </p>
+                                    <p ng-show="form.city.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To long</small>
+                                    </p>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4">Cell Phone</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" name="email" class="form-control" ng-model="user.phoneCell" >
-                                    </div>
+                            </div>
+                            <div class="form-group" ng-class="[{'has-error': form.cellPhone.$invalid && !form.cellPhone.$pristine} , {'rmv-btm-margin': form.cellPhone.$invalid && !form.cellPhone.$pristine}]">
+                                <label class="control-label col-sm-4">Cell Phone</label>
+                                <div class="col-sm-8">
+                                    <input type="text" 
+                                        name="cellPhone" 
+                                        class="form-control" 
+                                        ng-model="model.user.phoneCell"
+                                        ng-pattern="/^[0-9]{1,7}$/">
+                                    <p ng-show="form.cellPhone.$error.pattern" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Not a valid number</small>
+                                    </p>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4">Office Phone</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" name="email" class="form-control" ng-model="user.phoneOffice" >
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4">Email</label>
-                                    <div class="col-sm-8">
-                                        <input type="email" name="email" class="form-control" ng-model="user.email" required>
-                                    </div>
-                                </div> 
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4">Password</label>
-                                    <div class="col-sm-8">
-                                        <input type="password" name="password" class="form-control" ng-model="user.password" required>
-                                    </div>
-                                </div> 
-                                <div class="form-group"> 
-                                    <div class="col-sm-offset-4 col-sm-4">
-                                        <button class="btn btn-primary btn-block" type="submit">
-                                            Sign up
-                                        </button>
-                                    </div>
+                            </div>
+                            <div class="form-group" ng-class="[{'has-error': form.officePhone.$invalid && !form.officePhone.$pristine} , {'rmv-btm-margin': form.officePhone.$invalid && !form.officePhone.$pristine}]">
+                                <label class="control-label col-sm-4">Office Phone</label>
+                                <div class="col-sm-8">
+                                    <input type="text" 
+                                        name="officePhone" 
+                                        class="form-control" 
+                                        ng-model=" model.user.phoneOffice"
+                                        ng-pattern="/^[0-9]{1,7}$/">
+                                    <p ng-show="form.officePhone.$error.pattern" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Not a valid number</small>
+                                    </p>
                                 </div>
                                 
+                            </div>
+                            <div class="form-group" ng-class="[{'has-error': form.email.$invalid && !form.email.$pristine} , {'rmv-btm-margin': form.email.$invalid && !form.email.$pristine}]">
+                                <label class="control-label col-sm-4">Email</label>
+                                <div class="col-sm-8">
+                                    <input type="email" 
+                                        name="email" 
+                                        class="form-control" 
+                                        ng-model="model.user.email" 
+                                        required>
+                                    <p ng-show="form.email.$invalid && !form.email.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Invalid email</small>
+                                    </p>
+                                </div>
                                 
-                            </form>
-                        </li>
-                    </ul>
+                            </div> 
+                            <div class="form-group" ng-class="[{'has-error': form.password.$invalid && !form.password.$pristine} , {'rmv-btm-margin': form.password.$invalid && !form.password.$pristine}]">
+                                <label class="control-label col-sm-4">Password</label>
+                                <div class="col-sm-8">
+                                    <input type="password" 
+                                        name="password" 
+                                        class="form-control" 
+                                        ng-model="model.user.password" 
+                                        ng-required="required"
+                                        ng-minlength="4" 
+                                        ng-maxlength="20" 
+                                        ng-pattern="/[a-zA-Z0-9^ ]/">
+                                    <p ng-show="form.password.$error.required" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Password required</small>
+                                    </p>
+                                    <p ng-show="form.password.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To short</small>
+                                    </p>
+                                    <p ng-show="form.password.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To long</small>
+                                    </p>
+                                    <p ng-show="form.password.$error.pattern" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Invalid input</small>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group" 
+                                ng-class="[{'has-error': (form.confirmPassword.$invalid && !form.confirmPassword.$pristine) 
+                                        || form.confirmPassword.$valid && !form.confirmPassword.$pristine && model.user.password != model.user.confirmPassword} , 
+                                    {'rmv-btm-margin': form.confirmPassword.$invalid && !form.confirmPassword.$pristine},
+                                    {'has-success' : form.confirmPassword.$valid && !form.confirmPassword.$pristine && model.user.password == model.user.confirmPassword}]">
+                                <label class="control-label col-sm-4">Confirm password</label>
+                                <div class="col-sm-8">
+                                    <input type="password" 
+                                        name="confirmPassword" 
+                                        class="form-control"
+                                        ng-model="model.user.confirmPassword" 
+                                        ng-required="required"
+                                        ng-minlength="4" 
+                                        ng-maxlength="20" 
+                                        ng-pattern="/[a-zA-Z0-9^ ]/">
+                                    <p ng-show="form.confirmPassword.$error.required" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Confirm password required</small>
+                                    </p>
+                                    <p ng-show="form.confirmPassword.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To short</small>
+                                    </p>
+                                    <p ng-show="form.confirmPassword.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>To long</small>
+                                    </p>
+                                    <p ng-show="form.confirmPassword.$error.pattern" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Invalid input</small>
+                                    </p>
+                                    <p ng-show='form.confirmPassword.$valid && !form.confirmPassword.$pristine && model.user.password != model.user.confirmPassword' class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>Password do not match</small>
+                                    </p>
+                                </div>
+                            </div> 
+                            <div class="form-group"> 
+                                <div class="col-sm-offset-4 col-sm-4">
+                                    <button class="btn btn-primary btn-block" type="submit" ng-disabled="form.$invalid">
+                                        Sign up
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                            
                     
                     <div class="container-mrg">
                         <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="  closeAlert($index)">{{alert.msg}}</div>

@@ -1,6 +1,7 @@
 app.service('Activator', function ($http, $q, Router) {
 	this.activity = function(user) {
 		var deferred = $q.defer();
+		console.log(user._id);
 		$http.post(Router.get('activateUser'), {
 			id : user._id,
 			status : user.status

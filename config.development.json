@@ -1,0 +1,16 @@
+{
+  "port": 3000,
+  "tokenResetLife": "1h",
+  "tokenLoginLife": "24h",
+  "mongoose": {
+      "uri": "mongodb://nodesynebo:rout_main6@ds021346.mlab.com:21346/peacful_base"
+  },
+  "admin": {
+    "email": "nodesynebo@gmail.com",
+    "password": "rout_main6",
+    "lastName": "Admin"
+  },
+  "client": "../../Dropbox/mean_app",
+  "serverSecret": "supersecret",
+  "domain": "http://192.168.0.102"
+}

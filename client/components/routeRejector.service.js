@@ -10,7 +10,8 @@ app.factory('RouteRejector', function () {
 		],
 		all : [
 			'login/login.html',
-			'register/register.html'
+			'register/register.html',
+			'password/password.html'
 		]
 	}
 	return {

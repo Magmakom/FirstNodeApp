@@ -4,7 +4,6 @@ var winston = require('winston');
 winston.emitErrs = true;
 
 function logger(module) {
-    mkdirp(process.cwd() + '/logs', function(err) {});
     return new winston.Logger({
         transports: [
             new winston.transports.File({
@@ -29,7 +28,7 @@ function logger(module) {
 }
 
 function getFilePath(module) {
-    //using filename in log statements
+    mkdirp(process.cwd() + '/logs', function(err) {});
     return module.filename.split('/').slice(-2).join('/');
 }
 

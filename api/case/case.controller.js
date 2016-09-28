@@ -1,13 +1,14 @@
-var User = require('../../model/user');
-var Case = require('../../model/case');
+var User    = require('../../model/user');
+var Case    = require('../../model/case');
 var Counter = require('../../model/counter');
-var config = require('../../libs/config');
-var mailer = require('../../libs/mailer');
-var log = require('../../libs/log')(module);
-var jwt = require('jsonwebtoken');
+var config  = require('../../libs/config');
+var mailer  = require('../../libs/mailer');
+var log     = require('../../libs/log')(module);
 
-var validationError = function(res, err) {
-    return res.status(422).json(err);
+var jwt     = require('jsonwebtoken');
+
+function validationError(res, err, msg) {
+    return res.status(422).send(msg || err);
 };
 
 function pad(n, width, z) {
@@ -21,7 +22,12 @@ exports.cases = function(req, res) {
         .find({})
         .populate('_creator')
         .exec(function(err, cases) {
-            if (err) return res.status(500).send(err);
+            if (err) {
+                log.error('%s %s', err.name, err.message);
+                return res.status(500).send({
+                    message: 'Database Internal Error'
+                });
+            }
             casesMap = {};
             cases.forEach(function(caseItem) {
                 casesMap[caseItem._id] = {
@@ -30,6 +36,7 @@ exports.cases = function(req, res) {
                     "name": caseItem.name,
                     "body": caseItem.body,
                     "status": caseItem.status,
+                    "created": caseItem.created,
                     "userId": caseItem._creator._id,
                     "userName": caseItem._creator.name
                 };
@@ -38,13 +45,47 @@ exports.cases = function(req, res) {
         });
 };
 
+exports.userCases = function(req, res) {
+    var userId = req.body.userId || req.query.userId || req.params.userId;
+    Case
+        .find({
+            '_creator': userId
+        })
+        .exec(function(err, cases) {
+            if (err) {
+                log.error('%s %s', err.name, err.message);
+                return validationError(res, err, {
+                    message: 'User has no cases'
+                });
+            }
+            casesMap = {};
+            cases.forEach(function(caseItem) {
+                casesMap[caseItem._id] = {
+                    "_id": caseItem._id,
+                    "number": caseItem.number,
+                    "name": caseItem.name,
+                    "body": caseItem.body,
+                    "status": caseItem.status,
+                    "created": caseItem.created
+                };
+            });
+            res.send(casesMap);
+        });
+}
+
 exports.add = function(req, res) {
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
     var currentCaseCount = 0;
     Counter
         .count({})
         .exec(function(err, count) {
-            if (!err && count === 0) {
+            if (err) {
+                log.error('%s %s', err.name, err.message);
+                return res.status(500).send({
+                    message: 'Database Internal Error'
+                });
+            }
+            if (count === 0) {
                 var newCounter = new Counter({
                     caseCount: 1
                 });
@@ -57,11 +98,22 @@ exports.add = function(req, res) {
             }
         },
         function(err, counter) {
-            if (err) log.error('%s %s', err.name, err.message);
+            if (err) {
+                log.error('%s %s', err.name, err.message);
+                return res.status(500).send({
+                    message: 'Database Internal Error'
+                });
+            }
             if (counter) currentCaseCount = counter.caseCount;
             User
                 .findById(jwt.decode(token).id)
-                .exec(function(error, user) {
+                .exec(function(err, user) {
+                    if (err) {
+                        log.error('%s %s', err.name, err.message);
+                        return validationError(res, err, {
+                            message: 'Invalid session token'
+                        });
+                    }
                     var caseItem = new Case({
                         _creator: user._id,
                         number: pad(currentCaseCount, 10),
@@ -70,9 +122,9 @@ exports.add = function(req, res) {
                     });
                     caseItem.save(function(err) {
                         if (err) {
-                            log.error('%s %s %s', err.name, err.message, err.stack);
-                            return res.json({
-                                success: false
+                            log.error('%s %s %s', err.name, err.message);
+                            return validationError(res, err, {
+                                message: 'Unprocessable Case Entity'
                             });
                         }
                         res.json({
@@ -81,6 +133,7 @@ exports.add = function(req, res) {
                         template = "case";
                         params = {
                             "{!username}": user.name,
+                            "{!casetype}": caseItem.name,
                             "{!casenumber}": caseItem.number
                         };
                         mailer.sendMail(user.email, params, template, "Case stored");
@@ -108,8 +161,8 @@ exports.approve = function(req, res, next) {
         .exec(function(err, caseItem) {
             if (err) {
                 log.error('%s %s', err.name, err.message);
-                return res.json({
-                    success: false
+                return validationError(res, err, {
+                    message: 'Unprocessable Case Entity'
                 });
             }
             res.json({
@@ -123,6 +176,7 @@ exports.approve = function(req, res, next) {
             }
             params = {
                 "{!username}": caseItem._creator.name,
+                "{!casetype}": caseItem.name,
                 "{!casenumber}": caseItem.number
             };
             if (template) mailer.sendMail(caseItem._creator.email, params, template, "Case " + status);

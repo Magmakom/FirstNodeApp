@@ -1,11 +1,13 @@
-var User = require('../../model/user');
+var User   = require('../../model/user');
 var config = require('../../libs/config');
 var mailer = require('../../libs/mailer');
-var log = require('../../libs/log')(module);
-var jwt = require('jsonwebtoken');
+var auth   = require('../../libs/auth');
+var log    = require('../../libs/log')(module);
 
-var validationError = function(res, err) {
-    return res.status(422).json(err);
+var jwt    = require('jsonwebtoken');
+
+function validationError(res, err, msg) {
+    return res.status(422).send(msg || err);
 };
 
 exports.signup = function(req, res) {
@@ -24,13 +26,14 @@ exports.signup = function(req, res) {
         if (err) {
             log.error('%s %s', err.name, err.message);
             return res.json({
-                success: false
+                success: false,
+                message: err.message
             });
         }
-        log.info('user ' + req.body.email + ' was created');
+        log.info('User ' + req.body.email + ' was created');
         res.json({
             success: true,
-            message: 'user ' + req.body.email + ' was created'
+            message: 'User ' + req.body.email + ' was created'
         });
         template = "signup";
         params = {
@@ -41,7 +44,7 @@ exports.signup = function(req, res) {
 };
 
 exports.login = function(req, res) {
-    var token = generateToken(req.user);
+    var token = auth.generateLoginToken(req.user);
     res.json({
         success: true,
         message: 'Enjoy your token!',
@@ -52,8 +55,15 @@ exports.login = function(req, res) {
 
 exports.role = function(req, res) {
     token = req.body.token || req.query.token || req.headers['x-access-token'];
-    User.findById(jwt.decode(token).id, 'email role status', function(err, user) {
-        if (!user) return validationError;
+    User
+    .findById(jwt.decode(token).id, 'email role status')
+    .exec(function(err, user) {
+      if (err) {
+          log.error('%s %s', err.name, err.message);
+          return validationError(res, err, {
+              message: 'Invalid session token'
+          });
+      }
         res.json({
             success: true,
             role: user.role,
@@ -63,12 +73,19 @@ exports.role = function(req, res) {
 };
 
 exports.users = function(req, res) {
-    User.find({
+    User
+    .find({
         role: {
             '$ne': 'admin'
         }
-    }, 'lastName firstName email city phoneOffice phoneCell role created status', function(err, users) {
-        if (err) return res.status(500).send(err);
+    }, 'lastName firstName email city phoneOffice phoneCell role created status')
+    .exec(function(err, users) {
+      if (err) {
+          log.error('%s %s', err.name, err.message);
+          return res.status(500).send({
+              message: 'Database Internal Error'
+          });
+      }
         userMap = {};
         users.forEach(function(user) {
             userMap[user._id] = user;
@@ -78,10 +95,16 @@ exports.users = function(req, res) {
 };
 
 exports.user = function(req, res, next) {
-    userId = req.params.id;
-    User.findById(userId, function(err, user) {
-        if (err) return next(err);
-        if (!user) return res.status(401).send('Unauthorized');
+    userId = req.body.userId || req.query.userId || req.params.userId;
+    User
+    .findById(userId)
+    .exec(function(err, user) {
+      if (err) {
+          log.error('%s %s', err.name, err.message);
+          return validationError(res, err, {
+              message: 'Unprocessable User Entity'
+          });
+      }
         res.json(user.profile);
     });
 };
@@ -90,9 +113,15 @@ exports.approve = function(req, res, next) {
     userId = req.body.id;
     status = req.body.status;
 
-    User.findById(userId, 'email lastName firstName status', function(err, user) {
-        if (err) return res.status(500).send(err);
-        if (!user) return validationError;
+    User
+    .findById(userId)
+    .exec('email lastName firstName status', function(err, user) {
+      if (err) {
+          log.error('%s %s', err.name, err.message);
+          return validationError(res, err, {
+              message: 'Unprocessable User Entity'
+          });
+      }
         user.status = status;
         user.save(function(err) {
             if (err) {
@@ -111,23 +140,38 @@ exports.approve = function(req, res, next) {
         }
         params = {
             "{!username}": user.name,
-            "{!loginLink}": config.get('domain') + '/#/login?token=' + generateToken(user)
+            "{!loginLink}": config.get('domain') +
+                (process.env.NODE_ENV === 'development' ? ':' + config.get('port') : '') +
+                '/#/login?token=' + auth.generateLoginToken(user)
         };
         if (template) mailer.sendMail(user.email, params, template, "User " + status);
     });
 }
 
 exports.changePassword = function(req, res, next) {
-    var userId = req.params.id;
-    var oldPass = req.body.oldPassword;
-    var newPass = req.body.newPassword;
+    var newPassword = req.body.newPassword || req.query.newPassword || req.params.newPassword;
+    var oldPass = req.body.oldPass || req.query.oldPass || req.params.oldPass;
+    var userId = req.body.userId || req.query.userId || req.params.userId;
 
-    User.findById(userId, function(err, user) {
+    User
+    .findById(userId)
+    .exec(function(err, user) {
+      if (err) {
+          log.error('%s %s', err.name, err.message);
+          return validationError(res, err, {
+              message: 'Unprocessable User Entity'
+          });
+      }
         if (user.authenticate(oldPass)) {
             user.password = newPass;
             user.save(function(err) {
-                if (err) return validationError(res, err);
-                res.status(200).send('OK');
+              if (err) {
+                  log.error('%s %s', err.name, err.message);
+                  return validationError(res, err);
+              }
+                res.json({
+                    success: true
+                });
             });
         } else {
             res.status(403).send('Forbidden');
@@ -136,18 +180,63 @@ exports.changePassword = function(req, res, next) {
 };
 
 exports.resetPassword = function(req, res, next) {
-
+    var email = req.body.email || req.query.email || req.params.email;
+    User
+        .findOne({
+            'email': email
+        }, 'lastName firstName email role')
+        .exec(function(err, user) {
+          if (err) {
+              log.error('%s %s', err.name, err.message);
+              return validationError(res, err, {
+                  message: 'Unprocessable User Entity'
+              });
+          }
+            res.json({
+                success: true
+            });
+            template = "change-password";
+            params = {
+                "{!username}": user.name,
+                "{!passwordLink}": config.get('domain') +
+                    (process.env.NODE_ENV === 'development' ? ':' + config.get('port') : '') +
+                    '/#/password?token=' + auth.generateResetToken(user)
+            };
+            mailer.sendMail(user.email, params, template, "Reset Password");
+        })
 }
 
-function generateToken(user) {
-    token = jwt.sign({
-        id: user.id,
-        role: user.role
-    }, config.get('serverSecret'), {
-        expiresIn: config.get('tokenLife')
+exports.newPassword = function(req, res, next) {
+    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    var email = jwt.decode(token).email;
+    var newPassword = req.body.newPassword || req.query.newPassword || req.params.newPassword;
+    log.info('token=' + token);
+    log.info('email=' + email);
+
+    User
+    .findOne({
+        'email': email
+    })
+    .exec(function(err, user) {
+      if (err) {
+          log.error('%s %s', err.name, err.message);
+          return validationError(res, err, {
+              message: 'Unprocessable User Entity'
+          });
+      }
+        user.password = newPassword;
+        user.save(function(err) {
+          if (err) {
+              log.error('%s %s', err.name, err.message);
+              return validationError(res, err);
+          }
+            res.json({
+                success: true,
+                toke: auth.generateLoginToken(user)
+            });
+        });
     });
-    return token;
-}
+};
 
 exports.authCallback = function(req, res, next) {
     res.redirect('/');

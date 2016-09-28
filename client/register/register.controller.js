@@ -1,8 +1,14 @@
 app.controller('registerCtrl', function($scope, $http, Auth){
-	$scope.user = {};
-	$scope.alerts = [];
+	$scope.model = {
+		user : {},
+		alerts : [],
+		formView : true
+	}
+	
 	$scope.signUp = function(){
-		Auth.createUser($scope.user)
+		$scope.model.formView = false;
+		delete $scope.model.user.confirmPassword;
+		Auth.createUser($scope.model.user)
 			.then(function (data) {
 				console.log('success');
 				$scope.alerts = [];
@@ -15,6 +21,7 @@ app.controller('registerCtrl', function($scope, $http, Auth){
 		);
 	};
 	$scope.closeAlert = function(index) {
+		$scope.model.formView = true;
 		$scope.alerts.splice(index, 1);
 	};
 });

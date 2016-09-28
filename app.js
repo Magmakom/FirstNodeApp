@@ -1,10 +1,11 @@
-var mongoose = require('./libs/db/mongoose');
-var config = require('./libs/config');
-var log = require('./libs/log')(module);
+var mongoose   = require('./libs/db/mongoose');
+var config     = require('./libs/config');
+var log        = require('./libs/log')(module);
+
 var bodyParser = require('body-parser');
-var passport = require('passport');
-var path = require('path');
-var express = require('express');
+var passport   = require('passport');
+var path       = require('path');
+var express    = require('express');
 
 var app = express();
 
@@ -18,8 +19,8 @@ app.use(bodyParser.urlencoded({
 require('./routes')(app);
 
 app.listen(process.env.PORT || config.get('port'), function() {
-    log.info('Environment:\n' + JSON.stringify(process.env));
-    log.info('Running on port ' + process.env.PORT || config.get('port'));
+    log.info('Environment = ' + process.env.NODE_ENV);
+    log.info('Running on port ' + (process.env.PORT || config.get('port')));
 });
 
 exports = module.exports = app;
