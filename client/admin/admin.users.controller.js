@@ -120,6 +120,7 @@ app.controller('UserDetailsCtrl', function ($uibModalInstance, $uibModal, model,
             $scope.openResult({ type: 'success', message : 'User successfully approved' });
             $uibModalInstance.dismiss('cancel');
         }, function (err){
+            console.log(err);
             $scope.openResult({ type: 'danger', message : 'Approving failed.' + err });
             $uibModalInstance.dismiss('cancel');
         });

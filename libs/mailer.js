@@ -28,7 +28,7 @@ function sendMail(to, params, template, subject) {
         if (error) {
             return log.error(error);
         }
-        log.info('Mail sended to ' + to);
+        log.info('Mail sent to ' + to);
     });
 }
 

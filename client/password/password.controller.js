@@ -21,7 +21,7 @@ app.controller('passwordCtrl', function($scope, $routeParams, Auth, $cookies, $l
 			}, function (err) {
 				console.log(err);
 				$scope.model.view = false;
-				$scope.alerts.push({type: 'danger', msg: 'Sending failed ' + err});
+				$scope.alerts.push({type: 'danger', msg: 'Sending failed. ' + err.message});
 			}
 		);
 	};

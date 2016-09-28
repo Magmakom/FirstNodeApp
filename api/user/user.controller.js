@@ -1,13 +1,13 @@
-var User   = require('../../model/user');
+var User = require('../../model/user');
 var config = require('../../libs/config');
 var mailer = require('../../libs/mailer');
-var auth   = require('../../libs/auth');
-var log    = require('../../libs/log')(module);
+var auth = require('../../libs/auth');
+var log = require('../../libs/log')(module);
 
-var jwt    = require('jsonwebtoken');
+var jwt = require('jsonwebtoken');
 
 function validationError(res, err, msg) {
-    return res.status(422).send(msg || err);
+    return res.status(422).json(msg || err);
 };
 
 exports.signup = function(req, res) {
@@ -102,7 +102,7 @@ exports.user = function(req, res, next) {
             if (err) {
                 log.error('%s %s', err.name, err.message);
                 return validationError(res, err, {
-                    message: 'Unprocessable User Entity'
+                    message: 'User not found'
                 });
             }
             res.json(user.profile);
@@ -119,7 +119,7 @@ exports.approve = function(req, res, next) {
             if (err) {
                 log.error('%s %s', err.name, err.message);
                 return validationError(res, err, {
-                    message: 'Unprocessable User Entity'
+                    message: 'User not found'
                 });
             }
             user.status = status;
@@ -158,7 +158,7 @@ exports.changePassword = function(req, res, next) {
             if (err) {
                 log.error('%s %s', err.name, err.message);
                 return validationError(res, err, {
-                    message: 'Unprocessable User Entity'
+                    message: 'User not found'
                 });
             }
             if (user.authenticate(oldPass)) {
@@ -185,10 +185,10 @@ exports.resetPassword = function(req, res, next) {
             'email': email
         }, 'lastName firstName email role')
         .exec(function(err, user) {
-            if (err) {
-                log.error('%s %s', err.name, err.message);
+            if (err) log.error('%s %s', err.name, err.message);
+            if (err || !user) {
                 return validationError(res, err, {
-                    message: 'Unprocessable User Entity'
+                    message: 'Email not found'
                 });
             }
             res.json({
@@ -219,7 +219,7 @@ exports.newPassword = function(req, res, next) {
             if (err) {
                 log.error('%s %s', err.name, err.message);
                 return validationError(res, err, {
-                    message: 'Unprocessable User Entity'
+                    message: 'Email not found'
                 });
             }
             user.password = newPassword;
