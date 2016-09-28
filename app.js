@@ -1,6 +1,7 @@
-var mongoose   = require('./libs/db/mongoose');
-var config     = require('./libs/config');
-var log        = require('./libs/log')(module);
+var mongoose = require('./libs/db/mongoose');
+var config   = require('./libs/config');
+var log      = require('./libs/log')(module);
+var hack     = require('./libs/herokuHack');
 
 var bodyParser = require('body-parser');
 var passport   = require('passport');
@@ -22,5 +23,7 @@ app.listen(process.env.PORT || config.get('port'), function() {
     log.info('Environment = ' + process.env.NODE_ENV);
     log.info('Running on port ' + (process.env.PORT || config.get('port')));
 });
+
+hack.callApp();
 
 exports = module.exports = app;

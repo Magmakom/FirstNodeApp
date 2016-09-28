@@ -12,5 +12,5 @@
   },
   "client": "../../Dropbox/mean_app",
   "serverSecret": "supersecret",
-  "domain": "http://192.168.0.102"
+  "domain": "http://localhost:3000"
 }

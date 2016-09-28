@@ -141,7 +141,6 @@ exports.approve = function(req, res, next) {
         params = {
             "{!username}": user.name,
             "{!loginLink}": config.get('domain') +
-                (process.env.NODE_ENV === 'development' ? ':' + config.get('port') : '') +
                 '/#/login?token=' + auth.generateLoginToken(user)
         };
         if (template) mailer.sendMail(user.email, params, template, "User " + status);
@@ -199,7 +198,6 @@ exports.resetPassword = function(req, res, next) {
             params = {
                 "{!username}": user.name,
                 "{!passwordLink}": config.get('domain') +
-                    (process.env.NODE_ENV === 'development' ? ':' + config.get('port') : '') +
                     '/#/password?token=' + auth.generateResetToken(user)
             };
             mailer.sendMail(user.email, params, template, "Reset Password");
