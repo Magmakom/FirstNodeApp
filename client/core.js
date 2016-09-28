@@ -18,6 +18,10 @@ app.config(function ($routeProvider, $locationProvider, $httpProvider) {
             templateUrl : 'user/user.html',
             controller : 'userCtrl'
         })
+        .when('/user/cases', {
+            templateUrl : 'user/user.cases.html',
+            controller : 'userCasesCtrl'
+        })
         .when('/admin/users', {
             templateUrl: 'admin/admin.users.html',
             controller : 'adminUsersCtrl'
@@ -81,6 +85,7 @@ app.config(function ($routeProvider, $locationProvider, $httpProvider) {
                             if ((Auth.isAdmin() && !RouteRejector.isAvailable('admin', next.templateUrl))
                                 || Auth.isUser() && !RouteRejector.isAvailable('user', next.templateUrl)) 
                             {
+                                console.log(RouteRejector.isAvailable('user', next.templateUrl));
                                 $location.url('/login');
                             } 
                         }

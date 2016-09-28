@@ -67,7 +67,7 @@ app.controller('adminCasesCtrl', function($scope, $http, Auth, $location, Case, 
             $scope.openResult({type : 'success', message : 'Case successfully approved'});
     		$scope.model.caseMap[id].status = 'approved';
     	}, function (err){
-            $scope.openResult({type : 'danger', message: ' Approving failed.' + err});
+            $scope.openResult({type : 'danger', message: ' Approving failed.' + err.message});
     	});
     }
     $scope.reject = function(id) {
@@ -77,7 +77,7 @@ app.controller('adminCasesCtrl', function($scope, $http, Auth, $location, Case, 
             $scope.openResult({type : 'success', message : 'Case successfully rejected'});
             $scope.model.caseMap[id].status = 'rejected';
         }, function (err){
-            $scope.openResult({type : 'danger', message: ' Rejection failed.' + err});
+            $scope.openResult({type : 'danger', message: ' Rejection failed.' + err.message});
         });
     }
 	
@@ -107,7 +107,7 @@ app.controller('CaseDetailsCtrl', function($uibModalInstance, $uibModal, model, 
             $scope.openResult({type : 'success', message : 'Case successfully approved'});
             $uibModalInstance.dismiss('cancel');
         }, function (err){
-            $scope.openResult({type : 'danger', message: ' Approving failed.' + err});
+            $scope.openResult({type : 'danger', message: ' Approving failed.' + err.message});
             $uibModalInstance.dismiss('cancel');
         });
     }
@@ -119,7 +119,7 @@ app.controller('CaseDetailsCtrl', function($uibModalInstance, $uibModal, model, 
             $scope.openResult({type : 'success', message : 'Case successfully rejected'});
             $uibModalInstance.dismiss('cancel');
         }, function (err){
-            $scope.openResult({type : 'danger', message: ' Rejection failed.' + err});
+            $scope.openResult({type : 'danger', message: ' Rejection failed.' + err.message});
             $uibModalInstance.dismiss('cancel');
         });
     }

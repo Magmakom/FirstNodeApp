@@ -1,10 +1,10 @@
-var User = require('../../model/user');
+var User   = require('../../model/user');
 var config = require('../../libs/config');
 var mailer = require('../../libs/mailer');
-var auth = require('../../libs/auth');
-var log = require('../../libs/log')(module);
+var auth   = require('../../libs/auth');
+var log    = require('../../libs/log')(module);
 
-var jwt = require('jsonwebtoken');
+var jwt    = require('jsonwebtoken');
 
 function validationError(res, err, msg) {
     return res.status(422).json(msg || err);
@@ -25,10 +25,9 @@ exports.signup = function(req, res) {
     user.save(function(err) {
         if (err) {
             log.error('%s %s', err.name, err.message);
-            return res.json({
-                success: false,
-                message: err.message
-            });
+            return validationError(res, err, {
+                message: 'User already exists'
+            })
         }
         log.info('User ' + req.body.email + ' was created');
         res.json({

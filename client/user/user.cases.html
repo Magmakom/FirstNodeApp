@@ -1,0 +1,108 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="">WebSiteName</a>
+		</div>
+		<ul class="nav navbar-nav">
+			<li><a href="#/user">User panel</a></li>
+			<li><a href="#/user/cases">My cases</a></li>
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href="#/login" ng-click="logout()"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
+		</ul>
+	</div>
+</nav>
+
+<div class="container container-mrg-lg">
+	<div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 id="tables">Case Management</h4>
+        </div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="thumbnail" style="padding: 10px">
+						<form class="form-inline" name="form">
+							<div class="form-group">
+		        				<label>Search</label>
+								<input type="text" name="search" class="form-control" ng-model="model.search"  placeholder="Search">
+		        			</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="thumbnail" style="padding: 15px">
+						<table class="table table-hover">
+							 <thead>
+                    	        <tr>
+                                    <th>№</th>
+                                    <th>Case Code</th>
+                    	            <th>Case type</th>
+                    	            <th>Status</th>
+                    	        </tr>
+                    	    </thead>
+                    	    <tbody>
+                    	        <tr ng-repeat="case in model.cases | orderBy:model.sortKey:model.reverse | filter:model.search">
+                                    <td ng-click="openDetails(case)">{{$index + 1}}</td>
+                                    <td ng-click="openDetails(case)">#{{case.number}}</td>
+                                    <td ng-click="openDetails(case)">{{case.name}}</td>
+                                    <td ng-click="openDetails(case)">
+                                    	<span class="label label-info" ng-show="case.status=='waiting'">Waiting</span>
+                                    	<span class="label label-warning" ng-show="case.status=='rejected'">Rejected</span>
+                                    	<span class="label label-success" ng-show="case.status=='approved'">Approved</span>
+                                    </td>
+                                    
+                    	        </tr>
+                    	    </tbody>
+						</table>
+					</span>
+                    <div class="container-mrg">
+                         <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="  closeAlert($index)">{{alert.msg}}</div>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>	
+</div>
+
+<!-- Modals -->
+
+<script type="text/ng-template" id="caseDetailsModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Case Details: #{{model.number}}</h3>
+        Created date: {{model.created}}
+    </div>
+    <div class="modal-body" id="modal-body">
+        <table style="margin-left: 20px">
+            <tr>
+                <td><div class="label-details">Type:</div></td> <td>{{model.name}}</td>
+            </tr>
+            <tr>
+               <td><div class="label-details">Status:</div></td>
+               <td>
+                    <span class="label label-info" ng-show="model.status=='waiting'">Waiting</span>
+                    <span class="label label-warning" ng-show="model.status=='rejected'">Rejected</span>
+                    <span class="label label-success" ng-show="model.status=='approved'">Approved</span>
+               </td>
+            </tr>
+            <tr ng-repeat="(key, value) in model.body">
+                <td><div class="label-details">{{key}}:</div></td>
+                <td>{{value}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" type="button" ng-click="cancel()">Close</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="resultModal.html">
+    <div class="modal-body" id="modal-body">
+        <div role="alert" ng-class="'alert alert-' + (model.type || 'warning')">{{model.message}}</div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" type="button" ng-click="cancel()">Close</button>
+    </div>
+</script>

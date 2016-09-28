@@ -33,7 +33,7 @@ app.controller('passwordCtrl', function($scope, $routeParams, Auth, $cookies, $l
 				$location.url('/login/' + data.token);
 			}, function (err) {
 				$scope.model.view = false;
-				$scope.alerts.push({type: 'danger', msg: 'Changing failed ' + err});
+				$scope.alerts.push({type: 'danger', msg: 'Changing failed ' + err.message});
 			}
 		);
 	}

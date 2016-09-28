@@ -39,15 +39,27 @@ app.service('Case', function($http, $q, Router){
 		return deferred.promise;
 	};
 	this.getUserCases = function (userId) {
-		console.log('get all cases ' + userId)
-		var deferred = $q.defer();
-		$http.get(Router.get('getUserCases')+'?userId='+userId)
-		.success(function(data) {
-			deferred.resolve(data);
-		})
-		.error(function(err) {
-			deferred.reject(err);
-		});
-		return deferred.promise;
+		if (userId) {
+			var deferred = $q.defer();
+			$http.get(Router.get('getUserCases')+'?userId='+userId)
+			.success(function(data) {
+				deferred.resolve(data);
+			})
+			.error(function(err) {
+				deferred.reject(err);
+			});
+			return deferred.promise;
+		} else {
+			var deferred = $q.defer();
+			$http.get(Router.get('getUserCases'))
+			.success(function(data) {
+				deferred.resolve(data);
+			})
+			.error(function(err) {
+				deferred.reject(err);
+			});
+			return deferred.promise;
+		}
+		
 	};
 });

@@ -46,7 +46,8 @@ exports.cases = function(req, res) {
 };
 
 exports.userCases = function(req, res) {
-    var userId = req.body.userId || req.query.userId || req.params.userId;
+    var token = req.query.token || req.headers['x-access-token'];
+    var userId = jwt.decode(token).role === "user" ? jwt.decode(token).id : (req.body.userId || req.query.userId || req.params.userId);
     Case
         .find({
             '_creator': userId
@@ -58,6 +59,9 @@ exports.userCases = function(req, res) {
                     message: 'User has no cases'
                 });
             }
+            if (!cases || cases.length===0) return validationError(res, err, {
+                message: 'User has no cases'
+            });
             casesMap = {};
             cases.forEach(function(caseItem) {
                 casesMap[caseItem._id] = {

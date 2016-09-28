@@ -53,7 +53,7 @@ function isAuthenticated() {
             if (token) {
                 jwt.verify(token, config.get('serverSecret'), function(err, decoded) {
                     if (err) {
-                        res.status(403).send('Forbidden');
+                        res.status(403).json({message: 'Forbidden'});
                     } else {
                         req.decoded = decoded;
                         next();
@@ -71,12 +71,12 @@ function isApproved() {
             var token = req.body.token || req.query.token || req.headers['x-access-token'];
             if (token) {
                 User.findById(jwt.decode(token).id, 'name status', function(err, user) {
-                    if (err) return res.status(403).send('Forbidden');
+                    if (err) return res.status(403).json({message: 'Forbidden'});
                     if (!user) return validationError;
                     if (user.status === 'approved') {
                         next();
                     } else {
-                        if (!user) return res.status(401).send('Unauthorized');
+                        if (!user) return res.status(401).json({message: 'Unauthorized'});
                     }
                 });
             }
@@ -89,12 +89,12 @@ function isAdmin() {
             var token = req.body.token || req.query.token || req.headers['x-access-token'];
             if (token) {
                 User.findById(jwt.decode(token).id, 'name role', function(err, user) {
-                    if (err) return res.status(403).send('Forbidden');
-                    if (!user) return validationError;
+                    if (err) return res.status(403).json({message: 'Forbidden'});
+                    if (!user) return res.status(403).json({message: 'Forbidden'});
                     if (user.role === 'admin') {
                         next();
-                    } else {
-                        if (!user) return res.status(401).send('Unauthorized');
+                    }else{
+                      return res.status(403).json({message: 'Forbidden'});
                     }
                 });
             }

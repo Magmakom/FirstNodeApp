@@ -6,7 +6,8 @@ app.factory('RouteRejector', function () {
 			'admin/admin.cases.html'
 		],
 		user : [
-			'user/user.html'
+			'user/user.html',
+			'user/user.cases.html'
 		],
 		all : [
 			'login/login.html',
