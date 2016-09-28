@@ -56,57 +56,57 @@ exports.login = function(req, res) {
 exports.role = function(req, res) {
     token = req.body.token || req.query.token || req.headers['x-access-token'];
     User
-    .findById(jwt.decode(token).id, 'email role status')
-    .exec(function(err, user) {
-      if (err) {
-          log.error('%s %s', err.name, err.message);
-          return validationError(res, err, {
-              message: 'Invalid session token'
-          });
-      }
-        res.json({
-            success: true,
-            role: user.role,
-            status: user.status
-        });
-    })
+        .findById(jwt.decode(token).id, 'email role status')
+        .exec(function(err, user) {
+            if (err) {
+                log.error('%s %s', err.name, err.message);
+                return validationError(res, err, {
+                    message: 'Invalid session token'
+                });
+            }
+            res.json({
+                success: true,
+                role: user.role,
+                status: user.status
+            });
+        })
 };
 
 exports.users = function(req, res) {
     User
-    .find({
-        role: {
-            '$ne': 'admin'
-        }
-    }, 'lastName firstName email city phoneOffice phoneCell role created status')
-    .exec(function(err, users) {
-      if (err) {
-          log.error('%s %s', err.name, err.message);
-          return res.status(500).send({
-              message: 'Database Internal Error'
-          });
-      }
-        userMap = {};
-        users.forEach(function(user) {
-            userMap[user._id] = user;
+        .find({
+            role: {
+                '$ne': 'admin'
+            }
+        }, 'lastName firstName email city phoneOffice phoneCell role created status')
+        .exec(function(err, users) {
+            if (err) {
+                log.error('%s %s', err.name, err.message);
+                return res.status(500).send({
+                    message: 'Database Internal Error'
+                });
+            }
+            userMap = {};
+            users.forEach(function(user) {
+                userMap[user._id] = user;
+            });
+            res.send(userMap);
         });
-        res.send(userMap);
-    });
 };
 
 exports.user = function(req, res, next) {
     userId = req.body.userId || req.query.userId || req.params.userId;
     User
-    .findById(userId)
-    .exec(function(err, user) {
-      if (err) {
-          log.error('%s %s', err.name, err.message);
-          return validationError(res, err, {
-              message: 'Unprocessable User Entity'
-          });
-      }
-        res.json(user.profile);
-    });
+        .findById(userId)
+        .exec(function(err, user) {
+            if (err) {
+                log.error('%s %s', err.name, err.message);
+                return validationError(res, err, {
+                    message: 'Unprocessable User Entity'
+                });
+            }
+            res.json(user.profile);
+        });
 };
 
 exports.approve = function(req, res, next) {
@@ -114,37 +114,37 @@ exports.approve = function(req, res, next) {
     status = req.body.status;
 
     User
-    .findById(userId)
-    .exec('email lastName firstName status', function(err, user) {
-      if (err) {
-          log.error('%s %s', err.name, err.message);
-          return validationError(res, err, {
-              message: 'Unprocessable User Entity'
-          });
-      }
-        user.status = status;
-        user.save(function(err) {
+        .findById(userId, 'email lastName firstName status')
+        .exec(function(err, user) {
             if (err) {
                 log.error('%s %s', err.name, err.message);
-                return validationError(res, err);
+                return validationError(res, err, {
+                    message: 'Unprocessable User Entity'
+                });
             }
-            res.json({
-                success: true,
-            });
-        })
-        var template;
-        if (status === "approved") {
-            template = "signup.approve";
-        } else if (status === "rejected") {
-            template = "signup.reject";
-        }
-        params = {
-            "{!username}": user.name,
-            "{!loginLink}": config.get('domain') +
-                '/#/login?token=' + auth.generateLoginToken(user)
-        };
-        if (template) mailer.sendMail(user.email, params, template, "User " + status);
-    });
+            user.status = status;
+            user.save(function(err) {
+                if (err) {
+                    log.error('%s %s', err.name, err.message);
+                    return validationError(res, err);
+                }
+                res.json({
+                    success: true,
+                });
+            })
+            var template;
+            if (status === "approved") {
+                template = "signup.approve";
+            } else if (status === "rejected") {
+                template = "signup.reject";
+            }
+            params = {
+                "{!username}": user.name,
+                "{!loginLink}": config.get('domain') +
+                    '/#/login?token=' + auth.generateLoginToken(user)
+            };
+            if (template) mailer.sendMail(user.email, params, template, "User " + status);
+        });
 }
 
 exports.changePassword = function(req, res, next) {
@@ -153,29 +153,29 @@ exports.changePassword = function(req, res, next) {
     var userId = req.body.userId || req.query.userId || req.params.userId;
 
     User
-    .findById(userId)
-    .exec(function(err, user) {
-      if (err) {
-          log.error('%s %s', err.name, err.message);
-          return validationError(res, err, {
-              message: 'Unprocessable User Entity'
-          });
-      }
-        if (user.authenticate(oldPass)) {
-            user.password = newPass;
-            user.save(function(err) {
-              if (err) {
-                  log.error('%s %s', err.name, err.message);
-                  return validationError(res, err);
-              }
-                res.json({
-                    success: true
+        .findById(userId)
+        .exec(function(err, user) {
+            if (err) {
+                log.error('%s %s', err.name, err.message);
+                return validationError(res, err, {
+                    message: 'Unprocessable User Entity'
                 });
-            });
-        } else {
-            res.status(403).send('Forbidden');
-        }
-    });
+            }
+            if (user.authenticate(oldPass)) {
+                user.password = newPass;
+                user.save(function(err) {
+                    if (err) {
+                        log.error('%s %s', err.name, err.message);
+                        return validationError(res, err);
+                    }
+                    res.json({
+                        success: true
+                    });
+                });
+            } else {
+                res.status(403).send('Forbidden');
+            }
+        });
 };
 
 exports.resetPassword = function(req, res, next) {
@@ -185,12 +185,12 @@ exports.resetPassword = function(req, res, next) {
             'email': email
         }, 'lastName firstName email role')
         .exec(function(err, user) {
-          if (err) {
-              log.error('%s %s', err.name, err.message);
-              return validationError(res, err, {
-                  message: 'Unprocessable User Entity'
-              });
-          }
+            if (err) {
+                log.error('%s %s', err.name, err.message);
+                return validationError(res, err, {
+                    message: 'Unprocessable User Entity'
+                });
+            }
             res.json({
                 success: true
             });
@@ -212,28 +212,28 @@ exports.newPassword = function(req, res, next) {
     log.info('email=' + email);
 
     User
-    .findOne({
-        'email': email
-    })
-    .exec(function(err, user) {
-      if (err) {
-          log.error('%s %s', err.name, err.message);
-          return validationError(res, err, {
-              message: 'Unprocessable User Entity'
-          });
-      }
-        user.password = newPassword;
-        user.save(function(err) {
-          if (err) {
-              log.error('%s %s', err.name, err.message);
-              return validationError(res, err);
-          }
-            res.json({
-                success: true,
-                toke: auth.generateLoginToken(user)
+        .findOne({
+            'email': email
+        })
+        .exec(function(err, user) {
+            if (err) {
+                log.error('%s %s', err.name, err.message);
+                return validationError(res, err, {
+                    message: 'Unprocessable User Entity'
+                });
+            }
+            user.password = newPassword;
+            user.save(function(err) {
+                if (err) {
+                    log.error('%s %s', err.name, err.message);
+                    return validationError(res, err);
+                }
+                res.json({
+                    success: true,
+                    toke: auth.generateLoginToken(user)
+                });
             });
         });
-    });
 };
 
 exports.authCallback = function(req, res, next) {
