@@ -12,7 +12,7 @@ app.controller('adminUsersCtrl', function($scope, $http, Auth, $location, Activa
 		console.log(response);
         for (var key in $scope.model.usersMap) { 
             $scope.model.usersMap[key]['details'] = false;
-        	$scope.model.users.push($scope.model.usersMap[key]);
+        	$scope.model.users.unshift($scope.model.usersMap[key]);
         }
     });
 
@@ -100,7 +100,7 @@ app.controller('UserDetailsCtrl', function ($uibModalInstance, $uibModal, model,
         var i = 0
         for (var key in data) {
             data[key]['openDetails'] = false;
-            $scope.model.cases.push(data[key]);
+            $scope.model.cases.unshift(data[key]);
             $scope.model.cases[i].body = JSON.parse( data[key].body );
             i++
         }

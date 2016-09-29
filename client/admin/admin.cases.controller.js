@@ -13,7 +13,7 @@ app.controller('adminCasesCtrl', function($scope, $http, Auth, $location, Case, 
 		console.log(data);
 		var i = 0;
         for (var key in $scope.model.caseMap) { 
-        	$scope.model.cases.push($scope.model.caseMap[key]);
+        	$scope.model.cases.unshift($scope.model.caseMap[key]);
         	$scope.model.cases[i].body = JSON.parse( $scope.model.caseMap[key].body );
         	i++;
         }

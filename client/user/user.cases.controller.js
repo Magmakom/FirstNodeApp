@@ -8,7 +8,7 @@ app.controller('userCasesCtrl', function($scope, Case, $uibModal){
 			var i = 0
 			for (var key in data) {
         	    data[key]['openDetails'] = false;
-        	    $scope.model.cases.push(data[key]);
+        	    $scope.model.cases.unshift(data[key]);
         	    $scope.model.cases[i].body = JSON.parse( data[key].body );
         	    i++
         	}
