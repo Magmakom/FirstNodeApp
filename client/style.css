@@ -41,3 +41,9 @@ body {
 .rmv-top-margin {
 	margin-top: 0px
 }
+
+@media screen and (min-width: 480px) {
+    a.navbar-brand {
+        content: "FJC";
+    }
+}
