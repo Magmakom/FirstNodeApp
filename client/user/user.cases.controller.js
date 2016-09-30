@@ -1,4 +1,4 @@
-app.controller('userCasesCtrl', function($scope, Case, $uibModal){
+app.controller('userCasesCtrl', function($scope, Case, Auth, $uibModal){
 	$scope.model ={
 		cases : []
 	}
@@ -15,6 +15,8 @@ app.controller('userCasesCtrl', function($scope, Case, $uibModal){
 		}, function (err) {
 			console.log(err);
 		});
+
+    $scope.logout = Auth.logout;
 
 	$scope.openDetails = function (caseModel) {
         console.log(caseModel);
