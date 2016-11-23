@@ -4,7 +4,8 @@ app.controller('adminUsersCtrl', function($scope, $http, Auth, $location, Activa
 		users : [],
 		userMap : {},
 		sortKey : 'id', // set the default sort type
-  		reverse : false  // set the default sort order
+  		reverse : false,  // set the default sort order
+        currentPage : 1
 	}
 	$scope.alerts = [];
 	$http.get(Router.get('users')).success(function(response){ 
@@ -66,9 +67,9 @@ app.controller('adminUsersCtrl', function($scope, $http, Auth, $location, Activa
     	user.status = 'approved';
     	Activator.activity(user).then( function (data) {
     		$scope.model.usersMap[id].status = 'approved';
-            $scope.openResult({type : 'success', message : 'User successfully approved'});
+            $scope.openResult({type : 'success', message : 'המשתמש אושר בהצלחה'/*'User successfully approved'*/});
     	}, function (err){
-    		$scope.openResult({type : 'danger', message: ' Approving failed.' + err.message});
+    		$scope.openResult({type : 'danger', message: 'האישור נכשל '/*' Approving failed.'*/ + err.message});
     	});
     }
     $scope.reject = function(id) {
@@ -76,9 +77,9 @@ app.controller('adminUsersCtrl', function($scope, $http, Auth, $location, Activa
         user.status = 'rejected';
         Activator.activity(user).then( function (data) {
             $scope.model.usersMap[id].status = 'rejected';
-            $scope.openResult({type : 'success', message : 'User successfully rejected'});
+            $scope.openResult({type : 'success', message : 'המשתמש סורב בהצלחה'/*'User successfully rejected'*/});
         }, function (err){
-            $scope.openResult({type : 'danger', message: ' Rejection failed.' + err.message});
+            $scope.openResult({type : 'danger', message: 'הסרוב נכשל '/*' Rejection failed.'*/ + err.message});
         });
     }
     $scope.closeAlert = function(index) {
@@ -120,11 +121,11 @@ app.controller('UserDetailsCtrl', function ($uibModalInstance, $uibModal, model,
         console.log(user);
         Activator.activity(user).then( function (data) {
             $scope.model.user.status = 'approved';
-            $scope.openResult({ type: 'success', message : 'User successfully approved' });
+            $scope.openResult({ type: 'success', message : 'המשתמש אושר בהצלחה'/*'User successfully approved'*/ });
             $uibModalInstance.dismiss('cancel');
         }, function (err){
             console.log(err);
-            $scope.openResult({ type: 'danger', message : 'Approving failed.' + err.message });
+            $scope.openResult({ type: 'danger', message : 'האישור נכשל '/*' Approving failed.'*/ + err.message });
             $uibModalInstance.dismiss('cancel');
         });
     }
@@ -133,10 +134,10 @@ app.controller('UserDetailsCtrl', function ($uibModalInstance, $uibModal, model,
         user.status = 'rejected';
         Activator.activity(user).then( function (data) {
             $scope.model.user.status = 'rejected';
-            $scope.openResult({ type: 'success', message : 'User successfully rejected' });
+            $scope.openResult({ type: 'success', message : 'המשתמש סורב בהצלחה'/*'User successfully rejected'*/ });
             $uibModalInstance.dismiss('cancel');
         }, function (err){
-            $scope.openResult({ type: 'danger', message : 'Rejection failed.' + err.message });
+            $scope.openResult({ type: 'danger', message : 'הסרוב נכשל '/*' Rejection failed.'*/ + err.message });
             $uibModalInstance.dismiss('cancel');
         });
     }
@@ -145,20 +146,20 @@ app.controller('UserDetailsCtrl', function ($uibModalInstance, $uibModal, model,
         var caseItem = angular.copy($scope.model.caseMap[id]);
         caseItem.status = 'approved';
         Case.approving(caseItem).then( function (data) {
-            $scope.openResult({type : 'success', message : 'Case successfully approved'});
+            $scope.openResult({type : 'success', message : 'הפניה נסגרה בהצלחה'/*'Case successfully approved'*/});
             $scope.model.caseMap[id].status = 'approved';
         }, function (err){
-            $scope.openResult({type : 'danger', message: ' Approving failed.' + err.message});
+            $scope.openResult({type : 'danger', message: 'האישור נכשל. '/*'Approving failed. '*/ + err.message});
         });
     }
     $scope.rejectCase = function(id) {
         var caseItem = angular.copy($scope.model.caseMap[id]);
         caseItem.status = 'rejected';
         Case.approving(caseItem).then( function (data) {
-            $scope.openResult({type : 'success', message : 'Case successfully rejected'});
+            $scope.openResult({type : 'success', message : 'הפניה סורבה בהצלחה'/*'Case successfully rejected'*/});
             $scope.model.caseMap[id].status = 'rejected';
         }, function (err){
-            $scope.openResult({type : 'danger', message: ' Rejection failed.' + err.message});
+            $scope.openResult({type : 'danger', message: 'הסרוב נכשל '/*' Rejection failed.'*/ + err.message});
         });
     }
 

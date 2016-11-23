@@ -8,11 +8,11 @@
             </button>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
-            <a class="navbar-brand" href="">Federation of jewish communities of the CIS</a>
+            <!-- <a class="navbar-brand" href="">Federation of jewish communities of the CIS</a> -->
             <ul class="nav navbar-nav"></ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="#/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="#/register"><span class="glyphicon glyphicon-user"></span>הרשמה <!-- Sign Up --></a></li>
+                <li><a href="#/login"><span class="glyphicon glyphicon-log-in"></span>כניסה <!-- Login --></a></li>
             </ul>
         </div>
     </div>
@@ -23,29 +23,29 @@
 		<div class="col-sm-4 col-sm-offset-4">
 			<div class="panel panel-default" ng-controller='loginCtrl'>
 				<div class="panel-heading" style="text-align: center">
-		        	<h4 id="tables" >Login</h4>
+		        	<h4 id="tables" >כניסה<!-- Login --></h4>
 		        </div>
 				<div class="panel-body">
-					<div class="page-header" style="text-align: center; margin-top: 10px">
-                        <img src="http://res.cloudinary.com/dfs2je0ss/image/upload/v1474900062/logo_djcykg.png" width="180px" >
-                    </div>
+					<!-- <div class="page-header" style="text-align: center; margin-top: 10px">
+					    <img src="http://res.cloudinary.com/dfs2je0ss/image/upload/v1474900062/logo_djcykg.png" width="180px" >
+					</div> -->
                     <div class="thumbnail" style="padding:15px">
 		                <form class="form" name="formLogin" ng-submit="login(formLogin)">
 							<div class="form-group">
-				        		<input type="email" placeholder="Email" name="emailL" class="form-control" ng-model="user.email" required>
+				        		<input type="email" placeholder="מייל" name="emailL" class="form-control" ng-model="user.email" required>
 				        	</div>
 				        	<div class="form-group" style="margin-bottom: 5px">
-				        		<input type="password" placeholder="Password" name="passwordL" class="form-control" ng-model="user.password" required>
+				        		<input type="password" placeholder="ססמה" name="passwordL" class="form-control" ng-model="user.password" required>
 				        	</div>
 				        	<div class="row">
 				        		<div class="col-sm-12" style="text-align: center">
-				        			<a href="#/password">Forgot password?</a>
+				        			<a href="#/password">שכחת סיסמה? <!-- Forgot password? --></a>
 				        		</div>
 				        	</div>
 				        	<div class="row" style="margin-top: 10px">
 				        		<div class="col-sm-12">
 						    		<button class="btn btn-primary btn-block" type="submit">
-						    			Login
+						    			כניסה<!-- Login -->
 						    		</button>
 				        		</div>
 				        	</div> 

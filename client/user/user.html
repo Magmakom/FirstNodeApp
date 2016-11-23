@@ -8,13 +8,13 @@
             </button>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
-            <a class="navbar-brand" href="">Federation of jewish communities of the CIS</a>
+            <!-- <a class="navbar-brand" href="">Federation of jewish communities of the CIS</a> -->
             <ul class="nav navbar-nav">
-                <li><a href="#/user">User panel</a></li>
-                <li><a href="#/user/cases">My cases</a></li>
+                <li><a href="#/user">משתמש<!-- User panel --></a></li>
+                <li><a href="#/user/cases">הפניות שלי<!-- My cases --></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#/login" ng-click="logout()"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
+                <li><a href="#/login" ng-click="logout()"><span class="glyphicon glyphicon-log-in"></span> יציאה <!-- Log out --></a></li>
             </ul>
         </div>
     </div>
@@ -23,20 +23,20 @@
 <div class="container container-mrg-lg">
 	<div class="panel panel-default">
         <div class="panel-heading">
-            <h4 id="tables">User Panel</h4>
+            <h4 id="tables">משתמש<!-- User panel --></h4>
         </div>
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-sm-12">
-					<div class="page-header" style="text-align: center; margin-top: 10px">
+					<!-- <div class="page-header" style="text-align: center; margin-top: 10px">
                         <img src="http://res.cloudinary.com/dfs2je0ss/image/upload/v1474900062/logo_djcykg.png" width="180px" >
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-4">
                     <div class="btn-group-vertical col-sm-12" style="margin-bottom: 10px">
-                        <button type="button" class="btn btn-default btn-block btn-pdd" ng-repeat="(key,value) in model.forms" ng-click="view(key)">{{key}}</button>
+                        <button type="button" class="btn btn-default btn-block btn-pdd" ng-repeat="(key,value) in model.forms" ng-click="view(key)">{{value.label}}</button>
                     </div>
                 </div>
                 <div class="col-sm-8">
@@ -46,11 +46,11 @@
                         <form class="form-horizontal" name="formRussiaVisa" ng-submit="submit('Visa to Russia issue')" novalidate>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-8">
-                                    <h4>Visa to Russia issue</h4>
+                                    <h4>ויזה לרוסיה<!-- Visa to Russia issue --></h4>
                                 </div>
                             </div>
                             <div class="form-group" ng-class="[{'has-error': formRussiaVisa.officeAddress.$invalid && !formRussiaVisa.officeAddress.$pristine} , {'rmv-btm-margin': formRussiaVisa.officeAddress.$invalid && !formRussiaVisa.officeAddress.$pristine}]">
-                                <div class="control-label col-sm-3">Office address <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="control-label col-sm-3">כתובת המשרד<!-- Office address --> <div style="color:red;display:inline-block;">*</div></div>
                                 <div class="col-sm-8">
                                     <input type="text" 
                                         name="officeAddress" 
@@ -60,18 +60,18 @@
                                         ng-minlength="4" 
                                         ng-maxlength="20">
                                     <p ng-show="formRussiaVisa.officeAddress.$error.required && !formRussiaVisa.officeAddress.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>Office address required</small>
+                                        <small>כתובת משרד שדה חובה<!-- Office address required --></small>
                                     </p>
                                     <p ng-show="formRussiaVisa.officeAddress.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To short</small>
+                                        <small>ארוך מדי<!-- To short --></small>
                                     </p>
                                     <p ng-show="formRussiaVisa.officeAddress.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To long</small>
+                                        <small>קצר מדי<!-- To long --></small>
                                     </p>
                                 </div>
                             </div>
                             <div class="form-group" ng-class="[{'has-error': formRussiaVisa.passportNumber.$invalid && !formRussiaVisa.passportNumber.$pristine} , {'rmv-btm-margin': formRussiaVisa.passportNumber.$invalid && !formRussiaVisa.passportNumber.$pristine}]">
-                                <div class="control-label col-sm-3">Passport code <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="control-label col-sm-3">מספר דרכון<!-- Passport code --> <div style="color:red;display:inline-block;">*</div></div>
                                 <div class="col-sm-8">
                                     <input type="text" 
                                         name="passportNumber" 
@@ -81,24 +81,24 @@
                                         ng-minlength="4" 
                                         ng-maxlength="6">
                                     <p ng-show="formRussiaVisa.passportNumber.$error.required && !formRussiaVisa.passportNumber.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>Passport code required</small>
+                                        <small>מספר דרכון שדה חובה<!-- Passport code required --></small>
                                     </p>
                                     <p ng-show="formRussiaVisa.passportNumber.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To short</small>
+                                        <small>ארוך מדי<!-- To short --></small>
                                     </p>
                                     <p ng-show="formRussiaVisa.passportNumber.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To long</small>
+                                        <small>קצר מדי<!-- To long --></small>
                                     </p>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-4">
-                                    <small class="help-block"><div style="color:red;display:inline-block;">*</div> - Required field</small>
+                                    <small class="help-block"><div style="color:red;display:inline-block;">*</div> - שדה חובה<!-- Required field --></small>
                                 </div>
                             </div>
                             <div class="form-group"> 
                                 <div class="col-sm-offset-3 col-sm-4">
-                                    <button type="submit" class="btn btn-primary btn-block" ng-disabled="formRussiaVisa.$invalid">Submit</button>
+                                    <button type="submit" class="btn btn-primary btn-block" ng-disabled="formRussiaVisa.$invalid">שמור<!-- Submit --></button>
                                 </div>
                             </div>
                         </form>
@@ -109,11 +109,11 @@
                         <form class="form-horizontal" name="formUkraineVisa" ng-submit="submit('Visa to Ukraine issue')" novalidate>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-8">
-                                    <h4>Visa to Ukraine issue</h4>
+                                    <h4>ויזה לאוקראינה<!-- Visa to Ukraine issue --></h4>
                                 </div>
                             </div>
                             <div class="form-group" ng-class="[{'has-error': formUkraineVisa.officeAddress.$invalid && !formUkraineVisa.officeAddress.$pristine} , {'rmv-btm-margin': formUkraineVisa.officeAddress.$invalid && !formUkraineVisa.officeAddress.$pristine}]">
-                                <div class="control-label col-sm-3">Office address <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="control-label col-sm-3">כתובת המשרד<!-- Office address --> <div style="color:red;display:inline-block;">*</div></div>
                                 <div class="col-sm-8">
                                     <input type="text" 
                                         name="officeAddress" 
@@ -123,18 +123,18 @@
                                         ng-minlength="4" 
                                         ng-maxlength="20">
                                     <p ng-show="formUkraineVisa.officeAddress.$error.required && !formRussiaVisa.officeAddress.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>Office address required</small>
+                                        <small>כתובת משרד שדה חובה<!-- Office address required --></small>
                                     </p>
                                     <p ng-show="formUkraineVisa.officeAddress.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To short</small>
+                                        <small>ארוך מדי<!-- To short --></small>
                                     </p>
                                     <p ng-show="formUkraineVisa.officeAddress.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To long</small>
+                                        <small>קצר מדי<!-- To long --></small>
                                     </p>
                                 </div>
                             </div>
                             <div class="form-group" ng-class="[{'has-error': formUkraineVisa.passportNumber.$invalid && !formUkraineVisa.passportNumber.$pristine} , {'rmv-btm-margin': formUkraineVisa.passportNumber.$invalid && !formUkraineVisa.passportNumber.$pristine}]">
-                                <div class="control-label col-sm-3">Passport code <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="control-label col-sm-3">מספר דרכון<!-- Passport code --> <div style="color:red;display:inline-block;">*</div></div>
                                 <div class="col-sm-8">
                                     <input type="text" 
                                         name="passportNumber" 
@@ -144,24 +144,24 @@
                                         ng-minlength="4" 
                                         ng-maxlength="6">
                                     <p ng-show="formUkraineVisa.passportNumber.$error.required && !formRussiaVisa.passportNumber.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>Passport code required</small>
+                                        <small>מספר דרכון שדה חובה<!-- Passport code required --></small>
                                     </p>
                                     <p ng-show="formUkraineVisa.passportNumber.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To short</small>
+                                        <small>ארוך מדי<!-- To short --></small>
                                     </p>
                                     <p ng-show="formUkraineVisa.passportNumber.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To long</small>
+                                        <small>קצר מדי<!-- To long --></small>
                                     </p>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-4">
-                                    <small class="help-block"><div style="color:red;display:inline-block;">*</div> - Required field</small>
+                                    <small class="help-block"><div style="color:red;display:inline-block;">*</div> - שדה חובה<!-- Required field --></small>
                                 </div>
                             </div>
                             <div class="form-group"> 
                                 <div class="col-sm-offset-3 col-sm-4">
-                                    <button type="submit" class="btn btn-primary btn-block" ng-disabled="formUkraineVisa.$invalid">Submit</button>
+                                    <button type="submit" class="btn btn-primary btn-block" ng-disabled="formUkraineVisa.$invalid">שמור<!-- Submit --></button>
                                 </div>
                             </div>
                         </form>
@@ -172,11 +172,11 @@
                         <form class="form-horizontal" name="formAirportEquip" ng-submit="submit('Airport transfer equipment')">
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-8">
-                                    <h4>Airport transfer equipment</h4>
+                                    <h4>מספר טיסה<!-- Airport transfer equipment --></h4>
                                 </div>
                             </div>
                             <div class="form-group" ng-class="[{'has-error': formAirportEquip.name.$invalid && !formAirportEquip.name.$pristine} , {'rmv-btm-margin': formAirportEquip.name.$invalid && !formAirportEquip.name.$pristine}]">
-                                <div class="control-label col-sm-3">Name of equipment <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="control-label col-sm-3">שם הציוד<!-- Name of equipment --> <div style="color:red;display:inline-block;">*</div></div>
                                 <div class="col-sm-8">
                                     <input type="text" 
                                         name="name" 
@@ -186,18 +186,18 @@
                                         ng-minlength="4" 
                                         ng-maxlength="30">
                                     <p ng-show="formAirportEquip.name.$error.required && !formAirportEquip.name.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>Name of equipment required</small>
+                                        <small>שם ציוד שדה חובה<!-- Name of equipment required --></small>
                                     </p>
                                     <p ng-show="formAirportEquip.name.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To short</small>
+                                        <small>ארוך מדי<!-- To short --></small>
                                     </p>
                                     <p ng-show="formAirportEquip.name.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To long</small>
+                                        <small>קצר מדי<!-- To long --></small>
                                     </p>
                                 </div>
                             </div>
                             <div class="form-group" ng-class="[{'has-error': formAirportEquip.from.$invalid && !formAirportEquip.from.$pristine} , {'rmv-btm-margin': formAirportEquip.from.$invalid && !formAirportEquip.from.$pristine}]">
-                                <div class="control-label col-sm-3">From place <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="control-label col-sm-3">מיקום מקור<!-- From place --> <div style="color:red;display:inline-block;">*</div></div>
                                 <div class="col-sm-8">
                                     <input type="text" 
                                         name="from" 
@@ -207,18 +207,18 @@
                                         ng-minlength="4" 
                                         ng-maxlength="30">
                                     <p ng-show="formAirportEquip.from.$error.required && !formAirportEquip.from.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>From place required</small>
+                                        <small>מיקום מקור שדה חובה<!-- From place required --></small>
                                     </p>
                                     <p ng-show="formAirportEquip.from.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To short</small>
+                                        <small>ארוך מדי<!-- To short --></small>
                                     </p>
                                     <p ng-show="formAirportEquip.from.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To long</small>
+                                        <small>קצר מדי<!-- To long --></small>
                                     </p>
                                 </div>
                             </div>
                             <div class="form-group" ng-class="[{'has-error': formAirportEquip.to.$invalid && !formAirportEquip.to.$pristine} , {'rmv-btm-margin': formAirportEquip.to.$invalid && !formAirportEquip.to.$pristine}]">
-                                <div class="control-label col-sm-3">To place <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="control-label col-sm-3">מיקום יעד<!-- To place --> <div style="color:red;display:inline-block;">*</div></div>
                                 <div class="col-sm-8">
                                     <input type="text" 
                                         name="to" 
@@ -228,18 +228,18 @@
                                         ng-minlength="4" 
                                         ng-maxlength="30">
                                     <p ng-show="formAirportEquip.to.$error.required && !formAirportEquip.to.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To place required</small>
+                                        <small>מיקום יעד שדה חובה<!-- To place required --></small>
                                     </p>
                                     <p ng-show="formAirportEquip.to.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To short</small>
+                                        <small>ארוך מדי<!-- To short --></small>
                                     </p>
                                     <p ng-show="formAirportEquip.to.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To long</small>
+                                        <small>קצר מדי<!-- To long --></small>
                                     </p>
                                 </div>
                             </div>
                             <div class="form-group" ng-class="[{'has-error': formAirportEquip.date.$invalid && !formAirportEquip.date.$pristine} , {'rmv-btm-margin': formAirportEquip.date.$invalid && !formAirportEquip.date.$pristine}]">
-                                <div class="control-label col-sm-3">Date <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="control-label col-sm-3">תאריך<!-- Date --> <div style="color:red;display:inline-block;">*</div></div>
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                         <input type="text" 
@@ -257,19 +257,19 @@
                                         </span>
                                     </div>
                                     <p ng-show="formAirportEquip.date.$error.required && !formAirportEquip.date.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>Date required</small>
+                                        <small>תאריך שדה חובה<!-- Date required --></small>
                                     </p>
                                     
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-4">
-                                    <small class="help-block"><div style="color:red;display:inline-block;">*</div> - Required field</small>
+                                    <small class="help-block"><div style="color:red;display:inline-block;">*</div> - שדה חובה<!-- Required field --></small>
                                 </div>
                             </div>
                             <div class="form-group"> 
                                 <div class="col-sm-offset-3 col-sm-4">
-                                    <button type="submit" class="btn btn-primary btn-block" ng-disabled="formAirportEquip.$invalid">Submit</button>
+                                    <button type="submit" class="btn btn-primary btn-block" ng-disabled="formAirportEquip.$invalid">שמור<!-- Submit --></button>
                                 </div>
                             </div>
                         </form>
@@ -278,11 +278,11 @@
                         <form class="form-horizontal" name="formBanking" ng-submit="submit('Banking')">
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-8">
-                                    <h4>Banking</h4>
+                                    <h4>בנק<!-- Banking --></h4>
                                 </div>
                             </div>
                             <div class="form-group" ng-class="[{'has-error': formBanking.amount.$invalid && !formBanking.amount.$pristine} , {'rmv-btm-margin': formBanking.amount.$invalid && !formBanking.amount.$pristine}]">
-                                <div class="control-label col-sm-3">Amount ($) <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="control-label col-sm-3">סכום<!-- Amount --> ($) <div style="color:red;display:inline-block;">*</div></div>
                                 <div class="col-sm-8">
                                     <input type="text" 
                                         name="amount" 
@@ -293,21 +293,21 @@
                                         ng-maxlength="20"
                                         ng-pattern="/^[0-9]{1,7}$/">
                                     <p ng-show="formBanking.amount.$error.required && !formBanking.amount.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>Amount required</small>
+                                        <small>סכום שדה חובה<!-- Amount required --></small>
                                     </p>
                                     <p ng-show="formBanking.amount.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To short</small>
+                                        <small>ארוך מדי<!-- To short --></small>
                                     </p>
                                     <p ng-show="formBanking.amount.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To long</small>
+                                        <small>קצר מדי<!-- To long --></small>
                                     </p>
                                     <p ng-show="formBanking.amount.$error.pattern" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>Invalid amount</small>
+                                        <small>סכום לא תקין<!-- Invalid amount --></small>
                                     </p>
                                 </div>
                             </div>
                             <div class="form-group" ng-class="[{'has-error': formBanking.from.$invalid && !formBanking.from.$pristine} , {'rmv-btm-margin': formBanking.from.$invalid && !formBanking.from.$pristine}]">
-                                <div class="control-label col-sm-3">From <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="control-label col-sm-3">מ<!-- From --> <div style="color:red;display:inline-block;">*</div></div>
                                 <div class="col-sm-8">
                                     <input type="text" 
                                         name="from" 
@@ -317,18 +317,18 @@
                                         ng-minlength="4" 
                                         ng-maxlength="30">
                                     <p ng-show="formBanking.drom.$error.required && !formBanking.drom.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>From field required</small>
+                                        <small>שדה חובה מ <!-- From field required --></small>
                                     </p>
                                     <p ng-show="formBanking.drom.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To short</small>
+                                        <small>ארוך מדי<!-- To short --></small>
                                     </p>
                                     <p ng-show="formBanking.drom.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To long</small>
+                                        <small>קצר מדי<!-- To long --></small>
                                     </p>
                                 </div>
                             </div>
                             <div class="form-group" ng-class="[{'has-error': formBanking.to.$invalid && !formBanking.to.$pristine} , {'rmv-btm-margin': formBanking.to.$invalid && !formBanking.to.$pristine}]">
-                                <div class="control-label col-sm-3">To <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="control-label col-sm-3">ל<!-- To --> <div style="color:red;display:inline-block;">*</div></div>
                                 <div class="col-sm-8">
                                     <input type="text" 
                                         name="to" 
@@ -338,18 +338,18 @@
                                         ng-minlength="4" 
                                         ng-maxlength="30">
                                     <p ng-show="formBanking.to.$error.required && !formBanking.to.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To field required</small>
+                                        <small>שדה חובה ל<!-- To field required --></small>
                                     </p>
                                     <p ng-show="formBanking.to.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To short</small>
+                                        <small>ארוך מדי<!-- To short --></small>
                                     </p>
                                     <p ng-show="formBanking.to.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To long</small>
+                                        <small>קצר מדי<!-- To long --></small>
                                     </p>
                                 </div>
                             </div>
                             <div class="form-group" ng-class="[{'has-error': formBanking.info.$invalid && !formBanking.info.$pristine} , {'rmv-btm-margin': formBanking.info.$invalid && !formBanking.info.$pristine}]">
-                                <div class="control-label col-sm-3">Additional info</div>
+                                <div class="control-label col-sm-3">מידע נוסף<!-- Additional info --></div>
                                 <div class="col-sm-8">
                                     <input type="text" 
                                         name="info" 
@@ -358,15 +358,15 @@
                                         ng-minlength="4" 
                                         ng-maxlength="40">
                                     <p ng-show="formBanking.info.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To short</small>
+                                        <small>ארוך מדי<!-- To short --></small>
                                     </p>
                                     <p ng-show="formBanking.info.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To long</small>
+                                        <small>קצר מדי<!-- To long --></small>
                                     </p>
                                 </div>
                             </div>
                             <div class="form-group" ng-class="[{'has-error': formBanking.date.$invalid && !formBanking.date.$pristine} , {'rmv-btm-margin': formBanking.date.$invalid && !formBanking.date.$pristine}]">
-                                <div class="control-label col-sm-3">Date <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="control-label col-sm-3">תאריך<!-- Date --> <div style="color:red;display:inline-block;">*</div></div>
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                         <input type="text" 
@@ -384,13 +384,13 @@
                                         </span>
                                     </div>
                                     <p ng-show="formBanking.date.$invalid && !formBanking.date.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>Invalid</small>
+                                        <small>לא תקין</small>
                                     </p>
                                 </div>
                             </div>
                             <div class="form-group"> 
                                 <div class="col-sm-offset-3 col-sm-4">
-                                    <button type="submit" class="btn btn-primary btn-block"  ng-disabled="formBanking.$invalid">Submit</button>
+                                    <button type="submit" class="btn btn-primary btn-block"  ng-disabled="formBanking.$invalid">שמור<!-- Submit --></button>
                                 </div>
                             </div>
                         </form>
@@ -399,11 +399,11 @@
                         <form class="form-horizontal" name="formDebit" ng-submit="submit('Credit Debit')">
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-8">
-                                    <h4>Credit Debit</h4>
+                                    <h4>כרטיס אשראי<!-- Credit Debit --></h4>
                                 </div>
                             </div>
                             <div class="form-group" ng-class="[{'has-error': formDebit.amount.$invalid && !formDebit.amount.$pristine} , {'rmv-btm-margin': formDebit.amount.$invalid && !formDebit.amount.$pristine}]">
-                                <div class="control-label col-sm-3">Amount ($) <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="control-label col-sm-3">סכום<!-- Amount --> ($) <div style="color:red;display:inline-block;">*</div></div>
                                 <div class="col-sm-8">
                                     <input type="text" 
                                         name="amount" 
@@ -414,21 +414,21 @@
                                         ng-maxlength="20"
                                         ng-pattern="/^[0-9]{1,7}$/">
                                     <p ng-show="formDebit.amount.$error.required && !formDebit.amount.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>Amount required</small>
+                                        <small>סכום שדה חובה<!-- Amount required --></small>
                                     </p>
                                     <p ng-show="formDebit.amount.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To short</small>
+                                        <small>ארוך מדי<!-- To short --></small>
                                     </p>
                                     <p ng-show="formDebit.amount.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To long</small>
+                                        <small>קצר מדי<!-- To long --></small>
                                     </p>
                                     <p ng-show="formDebit.amount.$error.pattern" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>Invalid amount</small>
+                                        <small>סכום לא תקין<!-- Invalid amount --></small>
                                     </p>
                                 </div>
                             </div>
                             <div class="form-group" ng-class="[{'has-error': formDebit.from.$invalid && !formDebit.from.$pristine} , {'rmv-btm-margin': formDebit.from.$invalid && !formDebit.from.$pristine}]">
-                                <div class="control-label col-sm-3">From <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="control-label col-sm-3">מ<!-- From --> <div style="color:red;display:inline-block;">*</div></div>
                                 <div class="col-sm-8">
                                     <input type="text" 
                                         name="from" 
@@ -438,18 +438,18 @@
                                         ng-minlength="4" 
                                         ng-maxlength="30">
                                     <p ng-show="formDebit.from.$error.required && !formDebit.from.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>From field required</small>
+                                        <small>שדה חובה מ <!-- From field required --></small>
                                     </p>
                                     <p ng-show="formDebit.from.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To short</small>
+                                        <small>ארוך מדי<!-- To short --></small>
                                     </p>
                                     <p ng-show="formDebit.from.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To long</small>
+                                        <small>קצר מדי<!-- To long --></small>
                                     </p>
                                 </div>
                             </div>
                             <div class="form-group" ng-class="[{'has-error': formDebit.to.$invalid && !formDebit.to.$pristine} , {'rmv-btm-margin': formDebit.to.$invalid && !formDebit.to.$pristine}]">
-                                <div class="control-label col-sm-3">To <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="control-label col-sm-3">ל<!-- To --> <div style="color:red;display:inline-block;">*</div></div>
                                 <div class="col-sm-8">
                                     <input type="text" 
                                         name="to" 
@@ -459,18 +459,18 @@
                                         ng-minlength="4" 
                                         ng-maxlength="30">
                                     <p ng-show="formDebit.to.$error.required && !formDebit.to.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To field required</small>
+                                        <small>שדה חובה ל<!-- To field required --></small>
                                     </p>
                                     <p ng-show="formDebit.to.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To short</small>
+                                        <small>ארוך מדי<!-- To short --></small>
                                     </p>
                                     <p ng-show="formDebit.to.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To long</small>
+                                        <small>קצר מדי<!-- To long --></small>
                                     </p>
                                 </div>
                             </div>
                             <div class="form-group" ng-class="[{'has-error': formDebit.info.$invalid && !formDebit.info.$pristine} , {'rmv-btm-margin': formDebit.info.$invalid && !formDebit.info.$pristine}]">
-                                <div class="control-label col-sm-3">Additional info</div>
+                                <div class="control-label col-sm-3">מידע נוסף<!-- Additional info --></div>
                                 <div class="col-sm-8">
                                     <input type="text" 
                                         name="info" 
@@ -478,16 +478,16 @@
                                         ng-model="model.forms['Credit Debit']['Addition info']" 
                                         ng-minlength="4" 
                                         ng-maxlength="40">
-                                    <p ng-show="formDebit.to.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To short</small>
+                                    <p ng-show="formDebit.info.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>ארוך מדי<!-- To short --></small>
                                     </p>
-                                    <p ng-show="formDebit.to.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To long</small>
+                                    <p ng-show="formDebit.info.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
+                                        <small>>קצר מדי<!-- To long --></small>
                                     </p>
                                 </div>
                             </div>
                             <div class="form-group" ng-class="[{'has-error': formDebit.date.$invalid && !formDebit.date.$pristine} , {'rmv-btm-margin': formDebit.date.$invalid && !formDebit.date.$pristine}]">
-                                <div class="control-label col-sm-3">Date <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="control-label col-sm-3">תאריך<!-- Date --> <div style="color:red;display:inline-block;">*</div></div>
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                         <input type="text" 
@@ -506,18 +506,18 @@
                                         </span>
                                     </div>
                                     <p ng-show="formDebit.date.$invalid && !formDebit.date.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>Invalid</small>
+                                        <small>לא תקין</small>
                                     </p>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-4">
-                                    <small class="help-block"><div style="color:red;display:inline-block;">*</div> - Required field</small>
+                                    <small class="help-block"><div style="color:red;display:inline-block;">*</div> - שדה חובה<!-- Required field --></small>
                                 </div>
                             </div>
                             <div class="form-group"> 
                                 <div class="col-sm-offset-3 col-sm-4">
-                                    <button type="submit" class="btn btn-primary btn-block"  ng-disabled="formDebit.$invalid">Submit</button>
+                                    <button type="submit" class="btn btn-primary btn-block"  ng-disabled="formDebit.$invalid">שמור<!-- Submit --></button>
                                 </div>
                             </div>
                         </form>
@@ -525,12 +525,12 @@
                     <div class="thumbnail container-pdd" ng-show="model.forms['Purchase'].view">
                         <form class="form-horizontal" name="purchase" ng-submit="submit('Purchase')">
                             <div class="form-group">
-                                <div class="col-sm-offset-4 col-sm-8">
-                                    <h4>Purchase</h4>
+                                <div class="col-sm-offset-3 col-sm-8">
+                                    <h4>לִרְכּוֹשׁי<!-- Purchase --></h4>
                                 </div>
                             </div>
                             <div class="form-group" ng-class="[{'has-error': purchase.acquisition.$invalid && !purchase.acquisition.$pristine} , {'rmv-btm-margin': purchase.acquisition.$invalid && !purchase.acquisition.$pristine}]">
-                                <div class="control-label col-sm-4">Acquisition for (goods) <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="control-label col-sm-3">Acquisition for goods <div style="color:red;display:inline-block;">*</div></div>
                                 <div class="col-sm-8">
                                     <input type="text" 
                                         name="acquisition" 
@@ -543,15 +543,15 @@
                                         <small>Acquisition field required</small>
                                     </p>
                                     <p ng-show="purchase.acquisition.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To short</small>
+                                        <small>ארוך מדי<!-- To short --></small>
                                     </p>
                                     <p ng-show="purchase.acquisition.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To long</small>
+                                        <small>קצר מדי<!-- To long --></small>
                                     </p>
                                 </div>
                             </div>
                             <div class="form-group" ng-class="[{'has-error': purchase.where.$invalid && !purchase.where.$pristine} , {'rmv-btm-margin': purchase.where.$invalid && !purchase.where.$pristine}]">
-                                <div class="control-label col-sm-4">Where (place of purchase) <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="control-label col-sm-3">Place of purchase <div style="color:red;display:inline-block;">*</div></div>
                                 <div class="col-sm-8">
                                     <input type="text" 
                                         name="where" 
@@ -564,21 +564,21 @@
                                         <small>Where field required</small>
                                     </p>
                                     <p ng-show="purchase.where.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To short</small>
+                                        <small>ארוך מדי<!-- To short --></small>
                                     </p>
                                     <p ng-show="purchase.where.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To long</small>
+                                        <small>קצר מדי<!-- To long --></small>
                                     </p>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-4">
-                                    <small class="help-block"><div style="color:red;display:inline-block;">*</div> - Required field</small>
+                                    <small class="help-block"><div style="color:red;display:inline-block;">*</div> - שדה חובה<!-- Required field --></small>
                                 </div>
                             </div>
                             <div class="form-group"> 
                                 <div class="col-sm-offset-4 col-sm-4">
-                                    <button type="submit" class="btn btn-primary btn-block" ng-disabled="purchase.$invalid">Submit</button>
+                                    <button type="submit" class="btn btn-primary btn-block" ng-disabled="purchase.$invalid">שמור<!-- Submit --></button>
                                 </div>
                             </div>
                         </form>
@@ -587,11 +587,11 @@
                         <form class="form-horizontal" name="formOther" ng-submit="submit('Other')">
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-8">
-                                    <h4>Other</h4>
+                                    <h4>אחר<!-- Other --></h4>
                                 </div>
                             </div>
                             <div class="form-group" ng-class="[{'has-error': formOther.title.$invalid && !formOther.title.$pristine} , {'rmv-btm-margin': formOther.title.$invalid && !formOther.title.$pristine}]" >
-                                <div class="control-label col-sm-3">Title <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="control-label col-sm-3">נושא<!-- Title --> <div style="color:red;display:inline-block;">*</div></div>
                                 <div class="col-sm-8">
                                     <input type="text" 
                                         name="title" 
@@ -601,17 +601,17 @@
                                         ng-minlength="4" 
                                         ng-maxlength="20">
                                     <p ng-show="formOther.title.$error.required && !formOther.title.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>Title required</small>
+                                        <small>נושה שדה חובה<!-- Title required --></small>
                                     </p>
                                     <p ng-show="formOther.title.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To short</small>
+                                        <small>ארוך מדי<!-- To short --></small>
                                     </p>
                                     <p ng-show="formOther.title.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To long</small>
+                                        <small>קצר מדי<!-- To long --></small>
                                 </div>
                             </div>
                             <div class="form-group" ng-class="[{'has-error': formOther.msg.$invalid && !formOther.msg.$pristine} , {'rmv-btm-margin': formOther.msg.$invalid && !formOther.msg.$pristine}]">
-                                <div class="control-label col-sm-3">Message <div style="color:red;display:inline-block;">*</div></div>
+                                <div class="control-label col-sm-3">תוכן<!-- Message --> <div style="color:red;display:inline-block;">*</div></div>
                                 <div class="col-sm-8">
                                     <textarea class="form-control" 
                                         name="msg" 
@@ -622,23 +622,23 @@
                                         ng-maxlength="100">
                                     </textarea>
                                     <p ng-show="formOther.msg.$error.required && !formOther.msg.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>Message required</small>
+                                        <small>תוכן שדה חובה<!-- Message required --></small>
                                     </p>
                                     <p ng-show="formOther.msg.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To short</small>
+                                        <small>ארוך מדי<!-- To short --></small>
                                     </p>
                                     <p ng-show="formOther.msg.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To long</small>
+                                        <small>קצר מדי<!-- To long --></small>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-4">
-                                    <small class="help-block"><div style="color:red;display:inline-block;">*</div> - Required field</small>
+                                    <small class="help-block"><div style="color:red;display:inline-block;">*</div> - שדה חובה<!-- Required field--></small>
                                 </div>
                             </div>
                             <div class="form-group"> 
                                 <div class="col-sm-offset-3 col-sm-4">
-                                    <button type="submit" class="btn btn-primary btn-block" ng-disabled="formOther.$invalid" >Submit</button>
+                                    <button type="submit" class="btn btn-primary btn-block" ng-disabled="formOther.$invalid" >שמור<!-- Submit --></button>
                                 </div>
                             </div>
                         </form>

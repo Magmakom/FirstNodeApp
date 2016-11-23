@@ -21,7 +21,7 @@ app.controller('loginCtrl', function($scope, $rootScope, $http, $location, Auth,
 
 			}, function (error) {
 				$scope.alerts = [];
-				$scope.alerts.push({ type : 'danger', msg : 'Authentication failed.' });
+				$scope.alerts.push({ type : 'danger', msg : 'האימות נכשל'/*'Authentication failed.'*/ });
 			}
 		);
 	};
