@@ -1,6 +1,7 @@
 app.controller('userCasesCtrl', function($scope, Case, Auth, $uibModal){
 	$scope.model ={
-		cases : []
+		cases : [],
+        currentPage : 1
 	}
 	Case.getUserCases()
 		.then(function (data) {

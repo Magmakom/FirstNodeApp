@@ -16,7 +16,7 @@ app.controller('registerCtrl', function($scope, $http, Auth){
 			}, function(error){
 				console.log('error');
 				$scope.alerts = [];
-				$scope.alerts.push({ type : 'danger', msg : 'Authentication failed. ' + error.message });
+				$scope.alerts.push({ type : 'danger', msg : 'האימות נכשל '/*'Authentication failed.'*/  + error.message });
 			}
 		);
 	};

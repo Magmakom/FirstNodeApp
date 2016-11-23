@@ -8,11 +8,11 @@
             </button>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
-            <a class="navbar-brand" href="">Federation of jewish communities of the CIS</a>
+            <!-- <a class="navbar-brand" href="">Federation of jewish communities of the CIS</a> -->
             <ul class="nav navbar-nav"></ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="#/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="#/register"><span class="glyphicon glyphicon-user"></span>הרשמה <!-- Sign Up --></a></li>
+                <li><a href="#/login"><span class="glyphicon glyphicon-log-in"></span>כניסה <!-- Login --></a></li>
             </ul>
         </div>
     </div>
@@ -23,16 +23,16 @@
         <div class="col-sm-6 col-sm-offset-3">
             <div class="panel panel-default">
                 <div class="panel-heading" style="text-align: center">
-                    <h4 id="tables" >Sign Up</h4>
+                    <h4 id="tables" >הרשמה <!-- Sign Up --></h4>
                 </div>
                 <div class="panel-body">
-                    <div class="page-header" style="text-align: center; margin-top: 10px">
+                    <!-- <div class="page-header" style="text-align: center; margin-top: 10px">
                         <img src="http://res.cloudinary.com/dfs2je0ss/image/upload/v1474900062/logo_djcykg.png" width="180px" >
-                    </div>
+                    </div> -->
                     <div class="thumbnail" ng-show="model.formView" style="padding:10px">
                         <form class="form-horizontal" name="form" ng-submit="signUp(form)" novalidate>
                             <div class="form-group" ng-class="[{'has-error': form.firstName.$invalid && !form.firstName.$pristine} , {'rmv-btm-margin': form.firstName.$invalid && !form.firstName.$pristine}]">
-                                <label class="control-label col-sm-4">First Name <div style="color:red;display:inline-block;">*</div></label>
+                                <label class="control-label col-sm-4">שם פרטי<!-- First Name --> <div style="color:red;display:inline-block;">*</div></label>
                                 <div class="col-sm-8">
                                     <input type="text" 
                                         name="firstName" 
@@ -43,23 +43,23 @@
                                         ng-maxlength="20"
                                         ng-pattern="/^[a-zA-Z0-9]*$/">
                                     <p ng-show="form.firstName.$error.required && !form.firstName.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>Name required</small>
+                                        <small>שם פרטי הוא שדה חובה<!-- Name required --></small>
                                     </p>
                                     <p ng-show="form.firstName.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To short</small>
+                                        <small>ארוך מדי<!-- To short --></small>
                                     </p>
                                     <p ng-show="form.firstName.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To long</small>
+                                        <small>קצר מדי<!-- To long --></small>
                                     </p>
                                     <p ng-show="form.firstName.$error.pattern" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>Please use numbers letters only</small>
+                                        <small>אנה השתמש במספרים בלבד<!-- Please use numbers letters only --></small>
                                     </p>
                                 </div>
 
                                 
                             </div>
                             <div class="form-group" ng-class="[{'has-error': form.lastName.$invalid && !form.lastName.$pristine} , {'rmv-btm-margin': form.lastName.$invalid && !form.lastName.$pristine}]">
-                                <label class="control-label col-sm-4">Last Name <div style="color:red;display:inline-block;">*</div></label>
+                                <label class="control-label col-sm-4">שם משפחה<!-- Last Name --> <div style="color:red;display:inline-block;">*</div></label>
                                 <div class="col-sm-8">
                                     <input type="text" 
                                         name="lastName" 
@@ -71,21 +71,21 @@
                                         ng-pattern="/^[a-zA-Z0-9]*$/">
 
                                     <p ng-show="form.lastName.$error.required && !form.lastName.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>Name required</small>
+                                        <small>שם פרטי הוא שדה חובה<!-- Name required --></small>
                                     </p>
                                     <p ng-show="form.lastName.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To short</small>
+                                        <small>ארוך מדי<!-- To short --></small>
                                     </p>
                                     <p ng-show="form.lastName.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To long</small>
+                                        <small>קצר מדי<!-- To long --></small>
                                     </p>
                                     <p ng-show="form.lastName.$error.pattern" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>Please use numbers letters only</small>
+                                        <small>אנה השתמש במספרים בלבד<!-- Please use numbers letters only --></small>
                                     </p>
                                 </div>
                             </div>
                             <div class="form-group" ng-class="[{'has-error': form.city.$invalid && !form.city.$pristine} , {'rmv-btm-margin': form.city.$invalid && !form.city.$pristine}]">
-                                <label class="control-label col-sm-4">City</label>
+                                <label class="control-label col-sm-4">עיר<!-- City --></label>
                                 <div class="col-sm-8">
                                     <input type="text" 
                                         name="city" 
@@ -95,15 +95,15 @@
                                         ng-maxlength="20"
                                         ng-pattern="/[a-zA-Z0-9^ ]/">
                                     <p ng-show="form.city.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To short</small>
+                                        <small>ארוך מדי<!-- To short --></small>
                                     </p>
                                     <p ng-show="form.city.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To long</small>
+                                        <small>קצר מדי<!-- To long --></small>
                                     </p>
                                 </div>
                             </div>
                             <div class="form-group" ng-class="[{'has-error': form.cellPhone.$invalid && !form.cellPhone.$pristine} , {'rmv-btm-margin': form.cellPhone.$invalid && !form.cellPhone.$pristine}]">
-                                <label class="control-label col-sm-4">Cell Phone</label>
+                                <label class="control-label col-sm-4">טלפון<!-- Cell Phone --></label>
                                 <div class="col-sm-8">
                                     <input type="text" 
                                         name="cellPhone" 
@@ -111,12 +111,12 @@
                                         ng-model="model.user.phoneCell"
                                         ng-pattern="/^[0-9]{1,16}$/">
                                     <p ng-show="form.cellPhone.$error.pattern" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>Not a valid number</small>
+                                        <small>מספר טלפון לא תקין<!-- Not a valid number --></small>
                                     </p>
                                 </div>
                             </div>
                             <div class="form-group" ng-class="[{'has-error': form.officePhone.$invalid && !form.officePhone.$pristine} , {'rmv-btm-margin': form.officePhone.$invalid && !form.officePhone.$pristine}]">
-                                <label class="control-label col-sm-4">Office Phone</label>
+                                <label class="control-label col-sm-4">טלפון בעבודה<!-- Office Phone --></label>
                                 <div class="col-sm-8">
                                     <input type="text" 
                                         name="officePhone" 
@@ -124,13 +124,13 @@
                                         ng-model=" model.user.phoneOffice"
                                         ng-pattern="/^[0-9]{1,16}$/">
                                     <p ng-show="form.officePhone.$error.pattern" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>Not a valid number</small>
+                                        <small>מספר טלפון לא תקין<!-- Not a valid number --></small>
                                     </p>
                                 </div>
                                 
                             </div>
                             <div class="form-group" ng-class="[{'has-error': form.email.$error.email && !form.email.$pristine} , {'rmv-btm-margin': form.email.$error.email && !form.email.$pristine}]">
-                                <label class="control-label col-sm-4">Email <div style="color:red;display:inline-block;">*</div></label>
+                                <label class="control-label col-sm-4">מייל<!-- Email --> <div style="color:red;display:inline-block;">*</div></label>
                                 <div class="col-sm-8">
                                     <input type="email" 
                                         name="email" 
@@ -138,13 +138,13 @@
                                         ng-model="model.user.email" 
                                         required>
                                     <p ng-show="form.email.$error.email && !form.email.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>Invalid email</small>
+                                        <small>מייל לא תקין<!-- Invalid email --></small>
                                     </p>
                                 </div>
                                 
                             </div> 
                             <div class="form-group" ng-class="[{'has-error': form.password.$invalid && !form.password.$pristine} , {'rmv-btm-margin': form.password.$invalid && !form.password.$pristine}]">
-                                <label class="control-label col-sm-4">Password <div style="color:red;display:inline-block;">*</div></label>
+                                <label class="control-label col-sm-4">ססמה<!-- Password --> <div style="color:red;display:inline-block;">*</div></label>
                                 <div class="col-sm-8">
                                     <input type="password" 
                                         name="password" 
@@ -155,16 +155,16 @@
                                         ng-maxlength="20" 
                                         ng-pattern="/[a-zA-Z0-9^ ]/">
                                     <p ng-show="form.password.$error.required && !form.password.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>Password required</small>
+                                        <small>סיסמהה היא שדה חובה<!-- Password required --></small>
                                     </p>
                                     <p ng-show="form.password.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To short</small>
+                                        <small>ארוך מדי<!-- To short --></small>
                                     </p>
                                     <p ng-show="form.password.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To long</small>
+                                        <small>קצר מדי<!-- To long --></small>
                                     </p>
                                     <p ng-show="form.password.$error.pattern" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>Invalid input</small>
+                                        <small>ערך לא תקין<!-- Invalid input --></small>
                                     </p>
                                 </div>
                             </div>
@@ -173,7 +173,7 @@
                                         || form.confirmPassword.$valid && !form.confirmPassword.$pristine && model.user.password != model.user.confirmPassword} , 
                                     {'rmv-btm-margin': form.confirmPassword.$invalid && !form.confirmPassword.$pristine},
                                     {'has-success' : form.confirmPassword.$valid && !form.confirmPassword.$pristine && model.user.password == model.user.confirmPassword}]">
-                                <label class="control-label col-sm-4">Confirm Password <div style="color:red;display:inline-block;">*</div></label>
+                                <label class="control-label col-sm-4">אשר סיסמה<!-- Confirm Password --> <div style="color:red;display:inline-block;">*</div></label>
                                 <div class="col-sm-8">
                                     <input type="password" 
                                         name="confirmPassword" 
@@ -184,26 +184,26 @@
                                         ng-maxlength="20" 
                                         ng-pattern="/[a-zA-Z0-9^ ]/">
                                     <p ng-show="form.confirmPassword.$error.required && !form.confirmPassword.$pristine" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>Confirm password required</small>
+                                        <small>אישור סיסמה שדה חובה<!-- Confirm password required --></small>
                                     </p>
                                     <p ng-show="form.confirmPassword.$error.minlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To short</small>
+                                        <small>ארוך מדי<!-- To short --></small>
                                     </p>
                                     <p ng-show="form.confirmPassword.$error.maxlength" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>To long</small>
+                                        <small>קצר מדי<!-- To long --></small>
                                     </p>
                                     <p ng-show="form.confirmPassword.$error.pattern" class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>Invalid input</small>
+                                        <small>ערך לא תקין<!-- Invalid input --></small>
                                     </p>
                                     <p ng-show='form.confirmPassword.$valid && !form.confirmPassword.$pristine && model.user.password != model.user.confirmPassword' class="help-block rmv-btm-margin rmv-top-margin ">
-                                        <small>Password do not match</small>
+                                        <small>ססמאות לא תואמות<!-- Password do not match --></small>
                                     </p>
                                 </div>
                             </div> 
                             <div class="form-group"> 
                                 <div class="col-sm-offset-4 col-sm-4">
                                     <button class="btn btn-primary btn-block" type="submit" ng-disabled="form.$invalid || (model.user.password != model.user.confirmPassword)">
-                                        Sign up
+                                        הרשמה <!-- Sign Up -->
                                     </button>
                                 </div>
                             </div>

@@ -4,7 +4,8 @@ app.controller('adminCasesCtrl', function($scope, $http, Auth, $location, Case, 
 		cases : [],
 		caseMap : {},
 		sortKey : 'id', // set the default sort type
-  		reverse : false  // set the default sort order
+  		reverse : false,  // set the default sort order,
+        currentPage : 1
 	}
 	$scope.alerts = [];
 
@@ -64,20 +65,20 @@ app.controller('adminCasesCtrl', function($scope, $http, Auth, $location, Case, 
     	var caseItem = angular.copy($scope.model.caseMap[id]);
     	caseItem.status = 'approved';
     	Case.approving(caseItem).then( function (data) {
-            $scope.openResult({type : 'success', message : 'Case successfully approved'});
+            $scope.openResult({type : 'success', message : 'הפניה נסגרה בהצלחה'/*'Case successfully approved'*/});
     		$scope.model.caseMap[id].status = 'approved';
     	}, function (err){
-            $scope.openResult({type : 'danger', message: ' Approving failed.' + err.message});
+            $scope.openResult({type : 'danger', message: 'האישור נכשל. '/*'Approving failed. '*/ + err.message});
     	});
     }
     $scope.reject = function(id) {
         var caseItem = angular.copy($scope.model.caseMap[id]);
         caseItem.status = 'rejected';
         Case.approving(caseItem).then( function (data) {
-            $scope.openResult({type : 'success', message : 'Case successfully rejected'});
+            $scope.openResult({type : 'success', message : 'הפניה סורבה בהצלחה'/*'Case successfully rejected'*/});
             $scope.model.caseMap[id].status = 'rejected';
         }, function (err){
-            $scope.openResult({type : 'danger', message: ' Rejection failed.' + err.message});
+            $scope.openResult({type : 'danger', message: 'הסרוב נכשל '/*' Rejection failed.'*/ + err.message});
         });
     }
 	
@@ -104,10 +105,10 @@ app.controller('CaseDetailsCtrl', function($uibModalInstance, $uibModal, model, 
         caseItem.status = 'approved';
         Case.approving(caseItem).then( function (data) {
             $scope.model.status = 'approved';
-            $scope.openResult({type : 'success', message : 'Case successfully approved'});
+            $scope.openResult({type : 'success', message : 'הפניה נסגרה בהצלחה'/*'Case successfully approved'*/});
             $uibModalInstance.dismiss('cancel');
         }, function (err){
-            $scope.openResult({type : 'danger', message: ' Approving failed.' + err.message});
+            $scope.openResult({type : 'danger', message: 'האישור נכשל. '/*'Approving failed. '*/ + err.message});
             $uibModalInstance.dismiss('cancel');
         });
     }
@@ -116,10 +117,10 @@ app.controller('CaseDetailsCtrl', function($uibModalInstance, $uibModal, model, 
         caseItem.status = 'rejected';
         Case.approving(caseItem).then( function (data) {
             $scope.model.status = 'rejected';
-            $scope.openResult({type : 'success', message : 'Case successfully rejected'});
+            $scope.openResult({type : 'success', message : 'הפניה סורבה בהצלחה'/*'Case successfully rejected'*/});
             $uibModalInstance.dismiss('cancel');
         }, function (err){
-            $scope.openResult({type : 'danger', message: ' Rejection failed.' + err.message});
+            $scope.openResult({type : 'danger', message: 'הסרוב נכשל'/*' Rejection failed.'*/ + err.message});
             $uibModalInstance.dismiss('cancel');
         });
     }

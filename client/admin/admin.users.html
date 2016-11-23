@@ -8,13 +8,12 @@
             </button>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
-            <a class="navbar-brand" href="">Federation of jewish communities of the CIS</a>
             <ul class="nav navbar-nav">
-                <li><a href="#/admin/users">Users</a></li>
-                <li><a href="#/admin/cases">Cases</a></li>
+                <li><a href="#/admin/users">משתמשים<!-- Users --></a></li>
+                <li><a href="#/admin/cases">פניות<!-- Cases --></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#/login" ng-click="logout()"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
+                <li><a href="#/login" ng-click="logout()"><span class="glyphicon glyphicon-log-in"></span> יציאה <!-- Log out --></a></li>
             </ul>
         </div>
 	</div>
@@ -23,7 +22,7 @@
 <div class="container container-mrg-lg">
 	<div class="panel panel-default">
         <div class="panel-heading">
-            <h4 id="tables">User Management</h4>
+            <h4 id="tables">ניהול משתמשים<!-- User Management --></h4>
         </div>
 		<div class="panel-body">
 			<div class="row">
@@ -31,8 +30,8 @@
                     <div class="thumbnail" style="padding: 10px">
                         <form class="form-inline" name="form">
                             <div class="form-group">
-                                <label>Search</label>
-                                <input type="text" name="search" class="form-control" ng-model="model.search"  placeholder="Search">
+                                <label>חיפוש<!-- Search --></label>
+                                <input type="text" name="search" class="form-control" ng-model="model.search"  placeholder="חיפוש">
                             </div>
                         </form>
                     </div>
@@ -45,32 +44,32 @@
                             <thead>
                                 <tr>
                                     <th>№</th>
-                                    <th>Action</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Status</th>
+                                    <th>פעולות<!-- Action --></th>
+                                    <th>שם<!-- Name --></th>
+                                    <th>מייל<!-- Email --></th>
+                                    <th>סטטוס<!-- Status --></th>
                                 </tr>
                             </thead>
                     	    <tbody>
-                                <tr ng-repeat="user in model.users | orderBy:model.sortKey:model.reverse | filter:model.search">
-                                    <td ng-click="openDetails($event,user)">{{$index + 1}}</td>
+                                <tr ng-repeat="user in (model.users | orderBy:model.sortKey:model.reverse | filter:model.search).slice((model.currentPage-1)*15, ( model.currentPage-1)*15+15)">
+                                    <td ng-click="openDetails($event,user)">{{(model.currentPage-1)*15+$index + 1}}</td>
                                     <td width="150px">
                                         <div>
-                                            <a ng-show="user.status=='approved'" href="" ng-click="reject(user._id)" style="z-index: 99">Deactivate</a>
-                                            <a ng-show="user.status=='rejected'" href="" ng-click="approve(user._id)">Activate</a>
+                                            <a ng-show="user.status=='approved'" href="" ng-click="reject(user._id)" style="z-index: 99">הקפאת משתמש<!-- Deactivate --></a>
+                                            <a ng-show="user.status=='rejected'" href="" ng-click="approve(user._id)">פעילות<!-- Activate --></a>
                                             <div ng-show="user.status=='waiting'">
-                                                <a href="" ng-click="reject(user._id)">Reject</a>
+                                                <a href="" ng-click="reject(user._id)">סרב<!-- Reject --></a>
                                                 <b> | </b>
-                                                <a href="" ng-click="approve(user._id)">Approve</a>
+                                                <a href="" ng-click="approve(user._id)">אשר<!-- Approve --></a>
                                             </div>
                                         </div>
                                      </td>
                                     <td ng-click="openDetails($event,user)">{{user.firstName}} {{user.lastName}}</td>
                                     <td ng-click="openDetails($event,user)">{{user.email}}</td>
                                     <td ng-click="openDetails($event,user)">
-                                    	<span class="label label-info" ng-show="user.status=='waiting'">Waiting</span>
-                                    	<span class="label label-warning" ng-show="user.status=='rejected'">Rejected</span>
-                                    	<span class="label label-success" ng-show="user.status=='approved'">Approved</span>
+                                    	<span class="label label-info" ng-show="user.status=='waiting'">ממתין<!-- Waiting --></span>
+                                    	<span class="label label-warning" ng-show="user.status=='rejected'">מסורב<!-- Rejected --></span>
+                                    	<span class="label label-success" ng-show="user.status=='approved'">מאושר<!-- Approved --></span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -81,6 +80,15 @@
                     </div>
 				</div>
 			</div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul uib-pagination total-items="(model.cases | filter:model.search).length" 
+                    items-per-page="15" 
+                    ng-model="model.currentPage"
+                    previous-text="&rsaquo;" 
+                    next-text="&lsaquo;"></ul>
+                </div>
+            </div>
 		</div>
 	</div>
 </div>
@@ -89,78 +97,89 @@
 
 <script type="text/ng-template" id="userDetailsModal.html">
     <div class="modal-header">
-        <h3 class="modal-title" id="modal-title">User Details: {{model.user.firstName}} {{model.user.lastName}}</h3>
-        Signup date: {{model.user.created}}
+        <table>
+            <tr>
+                <td><h3 class="modal-title" id="modal-title">פרטי משתמש<!-- User Details -->: </h3></td>
+                <td><h3 class="modal-title" id="modal-title">{{model.user.firstName}} {{model.user.lastName}}</h3></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>תאריך רישום<!-- Signup date -->: </td>
+                <td>{{model.user.created}}</td>
+            </tr>
+        </table>
     </div>
     <div class="modal-body" id="modal-body">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h4 style="margin: 5px;">User:</h4>
+                <h4 style="margin: 5px;">משתמש<!-- User: --></h4>
             </div>
             <div class="panel-body">
                 <table>
                    <tr>
-                       <td><div class="label-details">Email:</div></td> <td>{{model.user.email}}</td>
+                       <td><div class="label-details">מייל<!-- Email -->:</div></td> <td>{{model.user.email}}</td>
                    </tr>
                    <tr>
-                       <td><div class="label-details">Name:</div></td> <td>{{model.user.firstName}} {{model.user.lastName}}</td>
+                       <td><div class="label-details">שם<!-- Name -->:</div></td> <td>{{model.user.firstName}} {{model.user.lastName}}</td>
                    </tr>
                    <tr>
-                      <td><div class="label-details">Status:</div></td>
+                      <td><div class="label-details">סטטוס<!-- Status -->:</div></td>
                       <td>
-                       <span class="label label-info" ng-show="model.user.status=='waiting'">Waiting</span>
-                       <span class="label label-warning" ng-show="model.user.status=='rejected'">Rejected</span>
-                       <span class="label label-success" ng-show="model.user.status=='approved'">Approved</span>
+                       <span class="label label-info" ng-show="model.user.status=='waiting'">ממתין<!-- Waiting --></span>
+                       <span class="label label-warning" ng-show="model.user.status=='rejected'">מסורב<!-- Rejected --></span>
+                       <span class="label label-success" ng-show="model.user.status=='approved'">מאושר<!-- Approved --></span>
                       </td>
                    </tr>
                    <tr>
-                       <td><div class="label-details">Cell phone:</div></td> <td>{{model.user.phoneCell}}</td>
+                       <td><div class="label-details">טלפון<!-- Cell phone -->:</div></td> <td>{{model.user.phoneCell}}</td>
                    </tr>
                    <tr>
-                       <td><div class="label-details">Office phone:</div></td> <td>{{model.user.phoneOffice}}</td>
+                       <td><div class="label-details">טלפון בעבודה<!-- Office phone -->:</div></td> <td>{{model.user.phoneOffice}}</td>
                    </tr>
                    <tr>
-                       <td><div class="label-details">City:</div></td> <td>{{model.user.city}}</td>
+                       <td><div class="label-details">עיר<!-- City -->:</div></td> <td>{{model.user.city}}</td>
                    </tr>
                    <tr>
-                       <td><div class="label-details">Total cases:</div></td><td><span class="badge">{{model.cases.length}}</span></td>
+                       <td><div class="label-details">מספר פניות<!-- Total cases -->:</div></td><td><span class="badge">{{model.cases.length}}</span></td>
                    </tr>
                 </table>
             </div>
         </div>
         <div class="panel panel-default" ng-show="model.cases.length>0">
             <div class="panel-heading">
-                <h4 style="margin: 5px;">Case list:</h4>
+                <h4 style="margin: 5px;">רשימת פניות<!-- Case list -->:</h4>
             </div>
             <div class="panel-body">
                 <table class="table table-hover">
                      <thead>
                         <tr>
                             <th>№</th>
-                            <th>Action</th>
-                            <th>Case Code</th>
-                            <th>Case type</th>
-                            <th>Status</th>
+                            <th>פעולות<!-- Action --></th>
+                            <th>מספר פניה<!-- Case Code --></th>
+                            <th>משתמש<!-- User --></th>
+                            <th>סוג פניה<!-- Case type --></th>
+                            <th>סטטוס<!-- Status --></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="case in model.cases | orderBy:model.sortKey:model.reverse | filter:model.search">
                             <td ng-click="openDetails(case)">{{$index + 1}}</td>
                             <td width="150px">
-                                <a ng-show="case.status=='rejected'" href="" ng-click="approveCase(case._id)">Activate</a>
-                                <a ng-show="case.status=='approved'" href="" ng-click="rejectCase(case._id)">Deactivate</a>
+                                <a ng-show="case.status=='rejected'" href="" ng-click="approveCase(case._id)">פעילות<!-- Activate --></a>
+                                <a ng-show="case.status=='approved'" href="" ng-click="rejectCase(case._id)">הקפאת משתמש<!-- Deactivate --></a>
                                 <div ng-show="case.status=='waiting'">
-                                    <a href="" ng-click="rejectCase(case._id)">Reject</a>
+                                    <a href="" ng-click="rejectCase(case._id)">סרב<!-- Reject --></a>
                                       <b> | </b>
-                                    <a href="" ng-click="approveCase(case._id)">Approve</a>
+                                    <a href="" ng-click="approveCase(case._id)">אשר<!-- Approve --></a>
                                 </div>
                             </td>
                             <td ng-click="openDetails(case)">#{{case.number}}</td>
                             <td ng-click="openDetails(case)">{{case.name}}</td>
                             <td ng-click="openDetails(case)">
-                                <span class="label label-info" ng-show="case.status=='waiting'">Waiting</span>
-                                <span class="label label-warning" ng-show="case.status=='rejected'">Rejected</span>
-                                <span class="label label-success" ng-show="case.status=='approved'">Approved</span>
+                                <span class="label label-info" ng-show="case.status=='waiting'">ממתין<!-- Waiting --></span>
+                                <span class="label label-warning" ng-show="case.status=='rejected'">מסורב<!-- Rejected --></span>
+                                <span class="label label-success" ng-show="case.status=='approved'">מאושר<!-- Approved --></span>
                             </td>
                             
                         </tr>
@@ -171,11 +190,11 @@
 
     </div>
     <div class="modal-footer">
-        <button ng-show="model.user.status=='waiting'" class="btn btn-success" type="button" ng-click="approve()">Approve</button>
-        <button ng-show="model.user.status=='waiting'" class="btn btn-danger" type="button" ng-click="reject()">Reject</button>
-        <button ng-show="model.user.status=='rejected'" class="btn btn-success" type="button" ng-click="approve()">Activate</button>
-        <button ng-show="model.user.status=='approved'" class="btn btn-danger" type="button" ng-click="reject()">Deactivate</button>
-        <button class="btn btn-default" type="button" ng-click="cancel()">Close</button>
+        <button ng-show="model.user.status=='waiting'" class="btn btn-success" type="button" ng-click="approve()">אשר<!-- Approve --></button>
+        <button ng-show="model.user.status=='waiting'" class="btn btn-danger" type="button" ng-click="reject()">סרב<!-- Reject --></button>
+        <button ng-show="model.user.status=='rejected'" class="btn btn-success" type="button" ng-click="approve()">פעילות<!-- Activate --></button>
+        <button ng-show="model.user.status=='approved'" class="btn btn-danger" type="button" ng-click="reject()">הקפאת משתמש<!-- Deactivate --></button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">סגור<!-- Close --></button>
     </div>
 </script>
 
@@ -188,14 +207,14 @@
     <div class="modal-body" id="modal-body">
         <table style="margin-left: 20px">
             <tr>
-                <td><div class="label-details">Type:</div></td> <td>{{model.name}}</td>
+                <td><div class="label-details">סוג<!-- Type -->:</div></td> <td>{{model.name}}</td>
             </tr>
             <tr>
-               <td><div class="label-details">Status:</div></td>
+               <td><div class="label-details">סטטוס<!-- Status -->:</div></td>
                <td>
-                    <span class="label label-info" ng-show="model.status=='waiting'">Waiting</span>
-                    <span class="label label-warning" ng-show="model.status=='rejected'">Rejected</span>
-                    <span class="label label-success" ng-show="model.status=='approved'">Approved</span>
+                    <span class="label label-info" ng-show="model.status=='waiting'">ממתין<!-- Waiting --></span>
+                    <span class="label label-warning" ng-show="model.status=='rejected'">מסורב<!-- Rejected --></span>
+                    <span class="label label-success" ng-show="model.status=='approved'">מאושר<!-- Approved --></span>
                </td>
             </tr>
             <tr ng-repeat="(key, value) in model.body">
@@ -205,11 +224,11 @@
         </table>
     </div>
     <div class="modal-footer">
-        <button ng-show="model.status=='waiting'" class="btn btn-success" type="button" ng-click="approve()">Approve</button>
-        <button ng-show="model.status=='waiting'" class="btn btn-danger" type="button" ng-click="reject()">Reject</button>
-        <button ng-show="model.status=='rejected'" class="btn btn-success" type="button" ng-click="approve()">Activate</button>
-        <button ng-show="model.status=='approved'" class="btn btn-danger" type="button" ng-click="reject()">Deactivate</button>
-        <button class="btn btn-default" type="button" ng-click="cancel()">Close</button>
+        <button ng-show="model.status=='waiting'" class="btn btn-success" type="button" ng-click="approve()">אשר<!-- Approve --></button>
+        <button ng-show="model.status=='waiting'" class="btn btn-danger" type="button" ng-click="reject()">סרב<!-- Reject --></button>
+        <button ng-show="model.status=='rejected'" class="btn btn-success" type="button" ng-click="approve()">פעילות<!-- Activate --></button>
+        <button ng-show="model.status=='approved'" class="btn btn-danger" type="button" ng-click="reject()">הקפאת משתמש<!-- Deactivate --></button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">סגור<!-- Close --></button>
     </div>
 </script>
 
@@ -219,6 +238,6 @@
         <div role="alert" ng-class="'alert alert-' + (model.type || 'warning')">{{model.message}}</div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-default" type="button" ng-click="cancel()">Close</button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">סגור<!-- Close --></button>
     </div>
 </script>
