@@ -157,7 +157,6 @@
                             <th>№</th>
                             <th>פעולות<!-- Action --></th>
                             <th>מספר פניה<!-- Case Code --></th>
-                            <th>משתמש<!-- User --></th>
                             <th>סוג פניה<!-- Case type --></th>
                             <th>סטטוס<!-- Status --></th>
                         </tr>
@@ -201,8 +200,8 @@
 
 <script type="text/ng-template" id="caseDetailsModal.html">
     <div class="modal-header">
-        <h3 class="modal-title" id="modal-title">Case Details: #{{model.number}}</h3>
-        Created date: {{model.created}}
+        <h3 class="modal-title" id="modal-title">פרטי פניה<!-- Case Details -->: #{{model.number}}</h3>
+        תאריך יצירה<!-- Created date -->: {{model.created}}
     </div>
     <div class="modal-body" id="modal-body">
         <table style="margin-left: 20px">
